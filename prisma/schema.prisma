@@ -13,9 +13,9 @@ model Profile {
   userId String @unique
   name String
   imageUrl String @db.Text
-  email String @db.Text
+  email String @db.Text //college email of student
 
-  servers Server[]
+  servers Server[] //server of college 
   members Member[]
   channels Channel[]
 
@@ -23,11 +23,11 @@ model Profile {
   updatedAt DateTime @updatedAt
 }
 
-model Server {
+model Server {   //college server
   id String @id @default(uuid())
   name String
   imageUrl String @db.Text
-  inviteCode String @db.Text
+  inviteCode String @db.Text      //college server unique invite code
 
   profileId String
   profile Profile @relation(fields: [profileId],references: [id],onDelete: Cascade)
