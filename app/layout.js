@@ -17,14 +17,13 @@ export default function RootLayout({ children }) {
       <html lang="en" suppressHydrationWarning>
         <body className={cn(
           font.className, 
-          "bg-white dark:bg-[#053B50]"
+          "bg-[#FFECD6] dark:bg-[#0C356A]"
           )}>
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
             enableSystem={false}
-            storageKey="uni-vibe">
-
+            storageKey="univibe-theme">
             {children}
           </ThemeProvider>
         </body>
