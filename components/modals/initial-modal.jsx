@@ -65,6 +65,21 @@ export const InititalModal = ()=> {
                     </DialogDescription>
                 </DialogHeader>
 
+                <Form {...form}>  
+                    <form onSubmit={form.handleSubmit(onsubmit)} 
+                    className="space-y-8">
+                      <div className="space-y-8 px-6">
+                        <div className="flex items-center justify-center text-center">
+                            TODO: Image Upload
+                        </div>
+                        
+
+                    
+
+                      </div>  
+                    </form>
+                </Form>
+
             </DialogContent> 
         </Dialog>
     )
