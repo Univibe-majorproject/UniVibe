@@ -2,6 +2,8 @@
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+
 
 import {
     Dialog,
@@ -22,9 +24,9 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 
-import { input } from "@/components/ui/input"
+import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Input } from "postcss";
+
 
 //creating our form schema 
 const formSchema = z.object({
@@ -32,11 +34,18 @@ const formSchema = z.object({
         message: "Server name is required."
     }),
     imageUrl: z.string().min(1, {
-        message: "Server images is required."
+        message: "Server image is required."
     })
 })
 
 export const InititalModal = ()=> {
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+      setIsMounted(true);
+
+    }, []);
+    
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -52,7 +61,9 @@ export const InititalModal = ()=> {
         console.log(values);
     }
 
-
+    if(!isMounted) {
+        return null;
+    }
     return (
         <Dialog open>
             <DialogContent className="bg-white text-black p-0 overflow-hidden"> 
@@ -77,20 +88,39 @@ export const InititalModal = ()=> {
                        <FormField
                         control={form.control}
                         name="name"
-                        render={({field})=>(
+                        render={({field}) => (
                             <FormItem>
                                 <FormLabel
                                 className="uppercase text-xs font-bold text-zinc-500
                                 dark:text-secondary/70"
                                 >
                                     Server Name
-                                </FormLabel>
+                            </FormLabel>
+
+                            <FormControl>
+                                <Input
+                                    disabled={`${isLoading}`}
+                                    className="bg-zinc-300/50 border-0
+                                    focus-visible:ring-0 text-black 
+                                    focus-visible:ring-offset-0"
+                                    placeholder="Enter server name"
+                                    {...field}
+                                />
+                            </FormControl>
+                            <FormMessage/>
+
                             </FormItem>
                         )}
                        />
                     
 
-                      </div>  
+                      </div> 
+                    <DialogFooter className={"bg-grey-100 px-6 py-4"}>
+                        <Button disable={`${isLoading}`}
+                        variant="primary">
+                            Create
+                        </Button>
+                    </DialogFooter> 
                     </form>
                 </Form>
 
