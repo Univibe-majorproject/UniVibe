@@ -56,7 +56,7 @@ export const InititalModal = () => {
 
   const isLoading = form.formState.isSubmitting;
 
-  //on submit function that creates server, if server not present 
+  //on submit function that creates server, if server not present
   const onSubmit = async (values) => {
     try {
       await axios.post("/api/servers", values);
@@ -98,7 +98,7 @@ export const InititalModal = () => {
                         <FileUpload
                           endpoint="serverImage"
                           value={field.value}
-                          onChange={field.onChange}                        
+                          onChange={field.onChange}
                         />
                       </FormControl>
                     </FormItem>
