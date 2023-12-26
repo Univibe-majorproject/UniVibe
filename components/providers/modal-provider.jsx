@@ -4,24 +4,22 @@ import { useEffect, useState } from "react";
 import { InviteModal } from "@/components/modals/invite-modal";
 
 export const ModalProvider = () => {
+  //handling isMount here
+  const [isMounted, setIsMounted] = useState(false);
 
-    //handling isMount here 
-    const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-    useEffect(()=>{
-        setIsMounted(true);
-    },[]);
+  if (!isMounted) {
+    return null;
+  } //preventing the modals render on the server side
+  //to prevent hydration errors
 
-    if(!isMounted){
-        return null;
-    }//preventing the modals render on the server side
-    //to prevent hydration errors 
-
-    return ( 
-        <>
-            <CreateServerModal />
-            <InviteModal/>
-        </>
-     );
-}
- 
+  return (
+    <>
+      <CreateServerModal />
+      <InviteModal />
+    </>
+  );
+};
