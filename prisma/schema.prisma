@@ -27,7 +27,7 @@ model Server {   //college server
   id String @id @default(uuid())
   name String
   imageUrl String @db.Text
-  inviteCode String @db.Text      //college server unique invite code
+  inviteCode String @unique    //college server unique invite code
 
   profileId String
   profile Profile @relation(fields: [profileId],references: [id],onDelete: Cascade)
