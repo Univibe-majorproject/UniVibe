@@ -26,7 +26,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FileUpload } from "@/components/file-upload";
 import { useRouter } from "next/navigation";
-import { userModal } from "@/hooks/use-modal-store";
+import { useModal } from "@/hooks/use-modal-store";
 
 //creating our form schema
 const formSchema = z.object({
@@ -39,11 +39,10 @@ const formSchema = z.object({
 });
 
 export const CreateServerModal = () => {
-  const { isOpen, onClose, type } = userModal();  
+  const { isOpen, onClose, type } = useModal();
   const router = useRouter();
 
   const isModalOpen = isOpen && type === "createServer";
-
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -68,11 +67,11 @@ export const CreateServerModal = () => {
     }
   };
 
-  //custom on close function 
-  const handleClose = ()=> {
+  //custom on close function
+  const handleClose = () => {
     form.reset();
     onClose();
-  }
+  };
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
