@@ -4,7 +4,7 @@ import { create } from "zustand";
 export const ModalType = "createServer" | "invite";
 
 
-export const userModal = create((set) => ({
+export const useModal = create((set) => ({
    type: null,
    data: {},
    isOpen: false,
