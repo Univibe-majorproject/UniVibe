@@ -5,19 +5,18 @@ import { InviteModal } from "@/components/modals/invite-modal";
 import { EditServerModal } from "@/components/modals/edit-server-modal";
 
 export const ModalProvider = () => {
+  //handling isMount here
+  const [isMounted, setIsMounted] = useState(false);
 
-    //handling isMount here 
-    const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-    useEffect(()=>{
-        setIsMounted(true);
-    },[]);
-
-    if(!isMounted){
-        return null;
-    }//preventing the modals render on the server side
-    //to prevent hydration errors 
-
+  if (!isMounted) {
+    return null;
+  } //preventing the modals render on the server side
+  //to prevent hydration errors
+  
     return ( 
         <>
             <CreateServerModal />
