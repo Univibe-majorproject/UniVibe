@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { ChannelType } from "@prisma/client";
+import qs from "query-string";
 
 import {
   Dialog,
@@ -24,7 +25,7 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
 
 import {
@@ -53,6 +54,7 @@ const formSchema = z.object({
 export const CreateChannelModal = () => {
   const { isOpen, onClose, type } = useModal();
   const router = useRouter();
+  const params = useParams();
 
   const isModalOpen = isOpen && type === "createChannel";
 
@@ -66,10 +68,16 @@ export const CreateChannelModal = () => {
 
   const isLoading = form.formState.isSubmitting;
 
-  //on submit function that creates server, if server not present
   const onSubmit = async (values) => {
     try {
-      await axios.post("/api/servers", values);
+      const url = qs.stringifyUrl({
+        url: "/api/channels",
+        query: {
+          serverId: params?.serverId,
+        }
+      })
+
+      await axios.post(url, values);
 
       form.reset();
       router.refresh();
@@ -160,6 +168,8 @@ export const CreateChannelModal = () => {
                       </SelectContent>
 
                     </Select>
+
+                    <FormMessage />
 
                   </FormItem>
                 )}
