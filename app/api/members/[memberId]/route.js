@@ -28,7 +28,7 @@ export async function DELETE(req, { params }) {
       data: {
         members: {
           deleteMany: {
-            id: params.mamberId,
+            id: params.memberId,
             profileId: {
               not: profile.id,
             },
