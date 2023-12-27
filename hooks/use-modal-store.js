@@ -1,7 +1,7 @@
 //hook to control all modal in our application
 import { create } from "zustand";
 
-export const ModalType = "createServer" | "invite" | "editServer";
+export const ModalType = "createServer" | "invite" | "editServer" | "members";
 
 export const useModal = create((set) => ({
   type: null,
