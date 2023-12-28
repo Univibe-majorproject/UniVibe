@@ -10,9 +10,12 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
+import { useRouter, useParams } from "next/navigation";
 
 export const ServerSearch = ({ data }) => {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+  const params = useParams();
 
   useEffect(() => {
     const down = (e) => {
@@ -24,6 +27,17 @@ export const ServerSearch = ({ data }) => {
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
   }, []);
+
+  const onClick = ({ id, type }) => {
+    setOpen(false);
+
+    if (type === "member") {
+      return router.push(`/servers/${params?.serverId}/conversations/${id}`);
+    }
+    if (type === "channel") {
+      return router.push(`/servers/${params?.serverId}/channels/${id}`);
+    }
+  };
 
   return (
     <>
@@ -66,7 +80,10 @@ export const ServerSearch = ({ data }) => {
               <CommandGroup key={label} heading={label}>
                 {data?.map(({ id, icon, name }) => {
                   return (
-                    <CommandItem key={id}>
+                    <CommandItem
+                      key={id}
+                      onSelect={() => onClick({ id, type })}
+                    >
                       {icon}
                       <span>{name}</span>
                     </CommandItem>
