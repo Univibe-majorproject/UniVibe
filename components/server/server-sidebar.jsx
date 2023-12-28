@@ -7,6 +7,7 @@ import { Hash, Mic, Video, ShieldCheck, ShieldAlert } from "lucide-react";
 
 import { ServerSearch } from "./server-search";
 import { ServerHeader } from "./server-header";
+import { Separator } from "@/components/ui/separator";
 
 const iconMap = {
   [ChannelType.TEXT]: <Hash className="mr-2 h-4 w-4" />,
@@ -122,6 +123,9 @@ export const ServerSidebar = async ({ serverId }) => {
             ]}
           />
         </div>
+        <Separator className="bg-zinc-200 dark:bg-zinc-700 
+        rounded-md my-2" />
+        
       </ScrollArea>
     </div>
   );
