@@ -2,7 +2,7 @@
 import { create } from "zustand";
 
 export const ModalType = "createServer" | "invite" | "editServer" | "members" 
-| "createChannel" | "leaveServer";
+| "createChannel" | "leaveServer" | "deleteServer";
 
 export const useModal = create((set) => ({
   type: null,
