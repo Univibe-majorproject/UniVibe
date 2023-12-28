@@ -1,6 +1,8 @@
 "use client";
 
-export const ServerSearch = ()=> {
+export const ServerSearch = ({
+    data
+})=> {
     return (
         <div>
             Server Search Component
