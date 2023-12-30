@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { ServerSearch } from "./server-search";
 import { ServerHeader } from "./server-header";
 import { ServerSection } from "./server-section";
+import { ServerChannel } from "./server-channel";
 
 const iconMap = {
   [ChannelType.TEXT]: <Hash className="mr-2 h-4 w-4" />,
@@ -133,6 +134,15 @@ export const ServerSidebar = async ({ serverId }) => {
               role={role}
               label="Text Channels"
             />
+
+            {textChannels.map((channel) => (
+              <ServerChannel 
+                key={channel.id}
+                channel={channel}
+                role={role}
+                server={server}
+              />
+            ))}
 
           </div>
         )}
