@@ -25,7 +25,7 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useRouter, useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
 
 import {
@@ -35,26 +35,26 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
+import { useEffect } from "react";
 
 //creating our form schema
 const formSchema = z.object({
-  name: z.string().min(1, {
-    message: "Channel name is required.",
-  }).refine(
-    name => name !== "general",
-    {
-      message: "Channel name cannot be 'general'"
-    }
-  ),
+  name: z
+    .string()
+    .min(1, {
+      message: "Channel name is required.",
+    })
+    .refine((name) => name !== "general", {
+      message: "Channel name cannot be 'general'",
+    }),
 
-  type: z.nativeEnum(ChannelType)
+  type: z.nativeEnum(ChannelType),
 });
 
 export const EditChannelModal = () => {
-  const { isOpen, onClose, type } = useModal();
+  const { isOpen, onClose, type, data } = useModal();
+  const { channel, server } = data;
   const router = useRouter();
-  const params = useParams();
 
   const isModalOpen = isOpen && type === "editChannel";
 
@@ -62,22 +62,28 @@ export const EditChannelModal = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      type: ChannelType.TEXT,
+      type: channel?.type || ChannelType.TEXT,
     },
   });
+
+  useEffect(() => {
+    if (channel) {
+      form.setValue("name", channel.name);
+      form.setValue("type", channel.type);
+    }
+  }, [form, channel]);
 
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values) => {
     try {
       const url = qs.stringifyUrl({
-        url: "/api/channels",
+        url: `/api/channels/${channel?.id}`,
         query: {
-          serverId: params?.serverId,
-        }
-      })
-
-      await axios.post(url, values);
+          serverId: server?.id,
+        },
+      });
+      await axios.patch(url, values);
 
       form.reset();
       router.refresh();
@@ -98,7 +104,7 @@ export const EditChannelModal = () => {
       <DialogContent className="bg-white text-black p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
-            Create Channel
+            Edit Channel
           </DialogTitle>
         </DialogHeader>
 
@@ -134,7 +140,7 @@ export const EditChannelModal = () => {
               <FormField
                 control={form.control}
                 name="type"
-                render={({ field })=>(
+                render={({ field }) => (
                   <FormItem>
                     <FormLabel>Channel Type</FormLabel>
                     <Select
@@ -149,14 +155,12 @@ export const EditChannelModal = () => {
                           focus:ring-offset-0 capitalize
                           outline-none"
                         >
-                          <SelectValue 
-                            placeholder="Select a channel type"
-                          />
+                          <SelectValue placeholder="Select a channel type" />
                         </SelectTrigger>
                       </FormControl>
 
                       <SelectContent>
-                        {Object.values(ChannelType).map((type)=> (
+                        {Object.values(ChannelType).map((type) => (
                           <SelectItem
                             key={type}
                             value={type}
@@ -166,11 +170,9 @@ export const EditChannelModal = () => {
                           </SelectItem>
                         ))}
                       </SelectContent>
-
                     </Select>
 
                     <FormMessage />
-
                   </FormItem>
                 )}
               />
