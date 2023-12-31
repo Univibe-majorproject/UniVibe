@@ -2,10 +2,8 @@
 
 import { useParams, useRouter } from "next/navigation";
 import {
-    Channel, 
     ChannelType, 
     MemberRole, 
-    Server,
 } from "@prisma/client";
 
 import { 
