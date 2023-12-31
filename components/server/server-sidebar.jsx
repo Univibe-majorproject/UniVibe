@@ -132,7 +132,7 @@ export const ServerSidebar = async ({ serverId }) => {
           <div className="mb-2">
             <ServerSection
               sectionType="channels"
-              ChannelType={ChannelType.TEXT}
+              channelType={ChannelType.TEXT}
               role={role}
               label="Text Channels"
             />
@@ -153,7 +153,7 @@ export const ServerSidebar = async ({ serverId }) => {
           <div className="mb-2">
             <ServerSection
               sectionType="channels"
-              ChannelType={ChannelType.AUDIO}
+              channelType={ChannelType.AUDIO}
               role={role}
               label="Voice Channels"
             />
@@ -173,7 +173,7 @@ export const ServerSidebar = async ({ serverId }) => {
           <div className="mb-2">
             <ServerSection
               sectionType="channels"
-              ChannelType={ChannelType.VIDEO}
+              channelType={ChannelType.VIDEO}
               role={role}
               label="Video Channels"
             />
