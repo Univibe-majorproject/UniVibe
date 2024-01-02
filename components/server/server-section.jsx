@@ -17,7 +17,7 @@ export const ServerSection = ({
     return (
         <div className="flex items-center justify-between py-2">
             <p className="text-xs uppercase font-semibold text-zinc-500
-            dark:text-zinc-400">
+            dark:text-[#38a4f1]/70">
                 {label}
             </p>
             {role !== MemberRole.GUEST && sectionType === "channels" && (
@@ -28,7 +28,7 @@ export const ServerSection = ({
                         dark:text-zinc-400 dark:hover:text-zinc-300
                         transition"
                     >
-                        <Plus className="h-4 w-4"/>
+                        <Plus className="h-4 w-4 text-[#38a4f1]/70"/>
                     </button>
                 </ActionTooltip>
             )}
@@ -41,7 +41,7 @@ export const ServerSection = ({
                         dark:text-zinc-400 dark:hover:text-zinc-300
                         transition"
                     >
-                        <Settings className="h-4 w-4"/>
+                        <Settings className="h-4 w-4 text-[#38a4f1]/70"/>
                     </button>
             </ActionTooltip>
             )}
