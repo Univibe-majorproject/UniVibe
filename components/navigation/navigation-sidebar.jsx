@@ -27,32 +27,31 @@ export const NavigationSidebar = async () => {
       },
     },
   });
-
+  const userServer = servers[0];
   return (
     <div
-      className="space-y-4 flex flex-col items-center
-        h-full text-primary w-full dark:bg-black bg-[#E3E5E8]
-        py-3"
+      className="space-y-4 flex flex-row items-center
+       text-primary w-full h-[72px] dark:bg-black bg-[#E3E5E8]
+        px-3"
     >
-      <NavigationAction />
-      <Separator
-        className="h-[2px] bg-zinc-300 dark:bg-[#CBFF01]
+      {/* <NavigationAction /> */}
+      {/* <Separator
+        className="h-[2px] bg-zinc-300 dark:bg-zinc-700
              rounded-md w-10 mx-auto"
-      />
+      /> */}
 
-      <ScrollArea className="flex-1 w-full">
+      {/* <ScrollArea className="w-full"> */}
         {/* render the server user is a part of  */}
-        {servers.map((server) => (
-          <div key={server.id} className="mb-4">
-            <NavigationItem
-              id={server.id}
-              name={server.name}
-              imageUrl={server.imageUrl}
+        {/* <div className="mr-4 flex w-full">
+        {   <NavigationItem
+              id={userServer.id}
+              name={userServer.name}
+              imageUrl={userServer.imageUrl}
             />
-          </div>
-        ))}
-      </ScrollArea>
-      <div className="pb-3 mt-auto flex items-center flex-col gap-y-4">
+        }
+        </div> */}
+      {/* </ScrollArea> */}
+      <div className="pb-3 mt-auto flex items-center flex-row gap-y-4">
         <ModeToggle />
         <UserButton
           afterSignOutUrl="/"

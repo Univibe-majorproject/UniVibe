@@ -77,11 +77,11 @@ export const ServerSidebar = async ({ serverId }) => {
   return (
     <div
       className="flex flex-col h-full text-primary w-full 
-        dark:bg-black bg-[#F2F3F5]"
+        dark:bg-black bg-[#F2F3F5] pl-3"
     >
       <ServerHeader server={server} role={role} />
 
-      <ScrollArea className="flex-1 px-3">
+      <ScrollArea className="flex-1">
         <div className="mt-2">
           <ServerSearch
             data={[
