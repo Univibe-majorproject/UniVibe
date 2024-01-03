@@ -6,7 +6,7 @@ import { UserButton } from "@clerk/nextjs";
 
 export const ChatHeader = ({ serverId, name, type, imageUrl }) => {
   return (
-    <div className="text-md font-semibold px-3 flex items-center  border-x-neutral-200 dark:border-[#CBFF01] border-b-2 justify-between h-[80px]">
+    <div className="text-md font-semibold px-4 flex items-center  border-x-neutral-200 dark:border-[#CBFF01] border-b-2 justify-between h-[80px]">
     <div className="flex items-center justify-center">
     <MobileToggle serverId={serverId} />
       {type === "channel" && (
