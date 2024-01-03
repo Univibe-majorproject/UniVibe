@@ -26,7 +26,7 @@ export const ServerSection = ({
                     onClick={()=> onOpen("createChannel", {channelType})}
                         className="text-zinc-500 hover:text-zinc-600
                         dark:text-zinc-400 dark:hover:text-zinc-300
-                        transition"
+                        transition z-20"
                     >
                         <Plus className="h-4 w-4 text-[#38a4f1]/70"/>
                     </button>
@@ -39,7 +39,7 @@ export const ServerSection = ({
                     onClick={()=> onOpen("members", {server})}
                         className="text-zinc-500 hover:text-zinc-600
                         dark:text-zinc-400 dark:hover:text-zinc-300
-                        transition"
+                        transition z-20"
                     >
                         <Settings className="h-4 w-4 text-[#38a4f1]/70"/>
                     </button>

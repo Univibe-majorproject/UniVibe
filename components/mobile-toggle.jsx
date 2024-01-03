@@ -19,7 +19,7 @@ export const MobileToggle = ({
                 <Menu/>
             </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="px-1 flex gap-0 w-64">
+        <SheetContent side="left" className="p-0 w-64 border-none">
             {/* <div className="w-[72px]">
                 <NavigationSidebar />   
             </div> */}
