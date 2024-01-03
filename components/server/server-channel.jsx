@@ -39,7 +39,6 @@ export const ServerChannel = ({ channel, server, role }) => {
         params?.channelId === channel.id && "bg-zinc-700/20 dark:bg-gradient-to-r from-purple-600 to-black"
       )}
     >
-      {/* icon will be changed later according to our need*/}
       <Icon className="flex-shrink-0 w-5 h-5 text-zinc-500 dark:text-[#CBFF01]/80" />
       <p
         className={cn(

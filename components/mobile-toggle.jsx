@@ -20,9 +20,6 @@ export const MobileToggle = ({
             </Button>
         </SheetTrigger>
         <SheetContent side="left" className="p-0 w-64 border-none">
-            {/* <div className="w-[72px]">
-                <NavigationSidebar />   
-            </div> */}
             <ServerSidebar serverId={serverId}/>
         </SheetContent>
     </Sheet>
