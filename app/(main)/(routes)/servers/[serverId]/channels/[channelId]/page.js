@@ -39,7 +39,6 @@ const ChannelIdPage = async ({ params }) => {
         <div className="flex-1 relative left-2">
           Future messages
         </div>
-        <div className="relative left-2">
         <ChatInput 
         name = {channel.name}
         type="channel"
@@ -48,8 +47,6 @@ const ChannelIdPage = async ({ params }) => {
           channelId: channel.id,
           serverId: channel.serverId
         }} />
-        </div>
-
     </div>
   )
 };
