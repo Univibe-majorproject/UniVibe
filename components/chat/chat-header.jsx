@@ -3,6 +3,7 @@ import { MobileToggle } from "@/components/mobile-toggle";
 import { UserAvatar } from "@/components/user-avatar";
 import { ModeToggle } from "@/components/mode-toggle";
 import { UserButton } from "@clerk/nextjs";
+import { SocketIndicator } from "@/components/socket-indicator";
 
 export const ChatHeader = ({ serverId, name, type, imageUrl }) => {
   return (
@@ -18,6 +19,9 @@ export const ChatHeader = ({ serverId, name, type, imageUrl }) => {
       <p className="font-semibold text-md text-black dark:dark:bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
         {name}
       </p>
+        <div className="ml-auto flex items-center pl-4">
+          <SocketIndicator/>
+        </div>
 
     </div>
     
