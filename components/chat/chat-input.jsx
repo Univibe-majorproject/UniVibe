@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useModal } from "@/hooks/use-modal-store";
 import { EmojiPicker } from "@/components/emoji-picker";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   content: z.string().min(1),
@@ -29,6 +30,7 @@ export const ChatInput = ({
 }) => {
 
   const {onOpen} = useModal();
+  const router = useRouter();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -45,6 +47,8 @@ export const ChatInput = ({
             query,
         });
         await axios.post(url,values);
+        form.reset();
+        router.refresh();
     } catch (error) {
         console.log(error);
     }
@@ -75,6 +79,7 @@ export const ChatInput = ({
                   />
                   <div className="absolute top-7 right-8">
                     <EmojiPicker
+                    onChange={(emoji)=> field.onChange(`${field.value} ${emoji}`)}
                      />
                   </div>
                 </div>
