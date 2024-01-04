@@ -6,7 +6,6 @@ import qs from "query-string"
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus } from "lucide-react";
-import { Smile } from "lucide-react";
 
 import {
   Form,
@@ -16,6 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useModal } from "@/hooks/use-modal-store";
+import { EmojiPicker } from "@/components/emoji-picker";
 
 const formSchema = z.object({
   content: z.string().min(1),
@@ -74,7 +74,8 @@ export const ChatInput = ({
                     {...field}
                   />
                   <div className="absolute top-7 right-8">
-                    <Smile/>
+                    <EmojiPicker
+                     />
                   </div>
                 </div>
               </FormControl>
