@@ -62,7 +62,7 @@ export const ServerSearch = ({ data }) => {
         <kbd
           className="pointer-events-none inline-flex
                     h-5 select-none items-center gap-1 rounded
-                    border bg-muted px-1.5 font-mono text-[10px]
+                    border bg-black px-1.5 font-mono text-[10px]
                     font-medium text-muted-forground
                     ml-auto"
         >
