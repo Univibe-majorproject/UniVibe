@@ -1,11 +1,9 @@
 "use client";
 
 import { Fragment} from "react";
-import { format } from "date-fns";
 import { Loader2, ServerCrash } from "lucide-react";
 
 import { useChatQuery } from "@/hooks/use-chat-query";
-
 import { ChatWelcome } from "./chat-welcome";
 
 
@@ -60,7 +58,7 @@ export const ChatMessages = ({
   return (
         <div className="flex-1 flex flex-col py-4 overflow-y-auto">
             <div className="flex-1">
-                <ChatWelcome 
+                <ChatWelcome
                 type={type}
                 name={name} 
                 />
