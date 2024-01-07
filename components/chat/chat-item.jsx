@@ -4,6 +4,7 @@ import { Member, MemberRole, Profile } from "@prisma/client";
 import { UserAvatar } from "@/components/user-avatar";
 import { ActionTooltip } from "@/components/action-tooltip";
 import { ShieldAlert, ShieldCheck } from "lucide-react";
+import Image from "next/image";
 
 const roleIconMap = {
   GUEST: null,
@@ -54,7 +55,21 @@ export const ChatItem = ({
               {timestamp}
             </span>
           </div>
-          {content}
+          {isImage && (
+            <a 
+              href={fileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative aspect-square rounded-md mt-2 overflow-hidden border flex items-center bg-secondary h-48 w-48"
+            >
+              <Image
+                src={fileUrl}
+                alt={content}
+                fill
+                className="object-cover"
+              />
+            </a>
+          )}
         </div>
       </div>
     </div>
