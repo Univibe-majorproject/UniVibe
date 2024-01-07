@@ -5,6 +5,7 @@ import { Loader2, ServerCrash } from "lucide-react";
 import {Member, Message, Profile} from "@prisma/client";
 import { useChatQuery } from "@/hooks/use-chat-query";
 import { ChatWelcome } from "./chat-welcome";
+import { ChatItem } from "./chat-item";
 
 
 export const ChatMessages = ({
@@ -67,9 +68,7 @@ export const ChatMessages = ({
                 {data?.pages?.map((group, i) => (
                 <Fragment key={i}>
                     {group.items.map((message) => (
-                    <div key={message.id}>
-                        {message.content}
-                    </div>
+                    <ChatItem/>
                 ))}
                 </Fragment>
             ))}
