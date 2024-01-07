@@ -1,10 +1,20 @@
 "use client";
 
-export const ChatItem = () => {
-    return (
-        <div>
-            chat item
-        </div>
-      );
+import { Member, MemberRole, Profile } from "@prisma/client";
+
+export const ChatItem = ({
+  id,
+  content,
+  member,
+  timestamp,
+  fileUrl,
+  deleted,
+  currentMember,
+  isUpdated,
+  socketUrl,
+  socketQuery
+}) => { 
+    <div>
+        chat item
+    </div>
 }
- 
