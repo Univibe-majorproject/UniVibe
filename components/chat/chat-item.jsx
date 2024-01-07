@@ -2,6 +2,14 @@
 
 import { Member, MemberRole, Profile } from "@prisma/client";
 import { UserAvatar } from "@/components/user-avatar";
+import { ActionTooltip } from "@/components/action-tooltip";
+import {ShieldAlert, ShieldCheck } from "lucide-react";
+
+const roleIconMap = {
+    "GUEST": null,
+    "MODERATOR": <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />,
+    "ADMIN": <ShieldAlert className="h-4 w-4 ml-2 text-rose-500" />,
+  }
 
 export const ChatItem = ({
   id,
@@ -27,6 +35,9 @@ export const ChatItem = ({
                         <p className="font-semibold text-sm hover:underline cursor-pointer">
                             {member.profile.name}
                         </p>
+                        <ActionTooltip label={member.role}>
+                            {roleIconMap[member.role]}
+                        </ActionTooltip>
                     </div>
                 </div>
             </div>
