@@ -49,7 +49,7 @@ export const ChatItem = ({
 }) => {
 
   const [isEditing, setIsEditing] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const { onOpen } = useModal();
 
   useEffect(() => {
     const handleKeyDown = (event) => {
