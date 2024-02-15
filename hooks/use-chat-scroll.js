@@ -49,7 +49,7 @@ export const useChatScroll = ({
         bottomRef.current?.scrollIntoView({
           behavior: "smooth",
         });
-      }, 100);
+      }, 0);
     }
   }, [bottomRef, chatRef, count, hasInitialized]);
 }
