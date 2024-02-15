@@ -29,7 +29,7 @@ export const useChatScroll = ({
 
   useEffect(() => {
     const bottomDiv = bottomRef?.current;
-    const topDiv = chatRef.current;
+    const topDiv = chatRef?.current;
     const shouldAutoScroll = () => {
       if (!hasInitialized && bottomDiv) {
         setHasInitialized(true);
