@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment} from "react";
+import { Fragment, useRef, ElementRef} from "react";
 import { format } from "date-fns";
 import { Member, Message, Profile } from "@prisma/client";
 import { Loader2, ServerCrash } from "lucide-react";
@@ -26,7 +26,10 @@ export const ChatMessages = ({
 }) => {
   const queryKey = `chat:${chatId}`;
   const addKey = `chat:${chatId}:messages`;
-  const updateKey = `chat:${chatId}:messages:update` 
+  const updateKey = `chat:${chatId}:messages:update`;
+
+  const chatRef = useRef<ElementRef<"div">>(null);
+  const bottomRef = useRef<ElementRef<"div">>(null);
 
   const {
     data,
@@ -66,7 +69,7 @@ export const ChatMessages = ({
   }
 
   return (
-        <div className="flex-1 flex flex-col py-4 overflow-y-auto relative left-8">
+        <div  ref={chatRef} className="flex-1 flex flex-col py-4 overflow-y-auto relative left-8">
             <div className="flex-1">
                 <ChatWelcome
                 type={type}
@@ -94,6 +97,7 @@ export const ChatMessages = ({
                 </Fragment>
             ))}
       </div>
+      <div ref={bottomRef}/>
         </div>
   )
 }
