@@ -4,6 +4,7 @@ import { UserAvatar } from "@/components/user-avatar";
 import { ModeToggle } from "@/components/mode-toggle";
 import { UserButton } from "@clerk/nextjs";
 import { SocketIndicator } from "@/components/socket-indicator";
+import { ChatVideoButton } from "@/components/chat/chat-video-button";
 
 export const ChatHeader = ({ serverId, name, type, imageUrl }) => {
   return (
@@ -25,6 +26,10 @@ export const ChatHeader = ({ serverId, name, type, imageUrl }) => {
 
     </div>
     
+    {type === "conversation" && (
+      <ChatVideoButton/>
+    )}
+
     <div className="flex items-center justify-center">
     <ModeToggle />
       <UserButton
