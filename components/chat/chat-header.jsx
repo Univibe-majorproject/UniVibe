@@ -36,7 +36,6 @@ export const ChatHeader = ({ serverId, name, type, imageUrl }) => {
         }}
       />
     </div>
-      
     </div>
   );
 };
