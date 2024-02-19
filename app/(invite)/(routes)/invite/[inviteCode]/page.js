@@ -1,16 +1,10 @@
-import { currentProfile } from "@/lib/current-profile";
-
 import { redirect } from "next/navigation";
-import { redirectToSignIn } from "@clerk/nextjs";
 import { db } from "@/lib/db";
+import { initialProfile } from "@/lib/initial-profile";
 
 const InviteCodePage = async ({ params }) => {
   //for fetching the current profile
-  const profile = await currentProfile();
-
-  if (!profile) {
-    return redirectToSignIn();
-  }
+  const profile = await initialProfile();
 
   //check if we have the invite code or not
   if (!params.inviteCode) {
