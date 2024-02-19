@@ -7,10 +7,12 @@ import { currentProfile } from "@/lib/current-profile";
 import { ChatHeader } from "@/components/chat/chat-header";
 import { ChatMessages } from "@/components/chat/chat-messages";
 import { ChatInput } from "@/components/chat/chat-input";
+import { MediaRoom } from "@/components/media-room";
 
 
 const MemberIdPage = async ({
   params,
+  searchParams
 }) => {
   const profile = await currentProfile();
 
@@ -50,7 +52,17 @@ const MemberIdPage = async ({
         serverId={params.serverId}
         type="conversation"
       />
-      <ChatMessages
+      {searchParams.video && (
+        <MediaRoom
+        chatId={conversation.id}
+        video={true}
+        audio={true}
+        />
+      )}
+      
+      {!searchParams.video && (
+        <>
+        <ChatMessages
             member={currentMember}
             name={otherMember.profile.name}
             chatId={conversation.id}
@@ -71,6 +83,9 @@ const MemberIdPage = async ({
               conversationId: conversation.id,
             }}
           />
+        </>
+      )}
+      
     </div>
    );
 }

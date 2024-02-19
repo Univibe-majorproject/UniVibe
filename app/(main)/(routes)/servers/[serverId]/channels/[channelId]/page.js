@@ -5,6 +5,8 @@ import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 import { redirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import {ChannelType} from "@prisma/client";
+import { MediaRoom } from "@/components/media-room";
 
 const ChannelIdPage = async ({ params }) => {
   const profile = await currentProfile();
@@ -37,8 +39,9 @@ const ChannelIdPage = async ({ params }) => {
         serverId={channel.serverId}
         type="channel"
         />
-        
-        <ChatMessages
+        {channel.type === ChannelType.TEXT && (
+          <>
+          <ChatMessages
         member={member}
         name={channel.name}
         chatId={channel.id}
@@ -60,6 +63,24 @@ const ChannelIdPage = async ({ params }) => {
           channelId: channel.id,
           serverId: channel.serverId
         }} />
+          
+          </>
+        )} 
+        {channel.type === ChannelType.AUDIO && (
+          <MediaRoom
+           chatId={channel.id}
+           video={false}
+           audio={true}
+          />
+        )}
+
+        {channel.type === ChannelType.VIDEO && (
+          <MediaRoom
+           chatId={channel.id}
+           video={true}
+           audio={true}
+          />
+        )}
     </div>
   )
 };
