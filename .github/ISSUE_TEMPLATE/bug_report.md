@@ -2,7 +2,7 @@
 name: Bug report
 about: Create a report to help us improve
 title: "[BUG]: "
-labels: ''
+labels: 'bug'
 assignees: ''
 
 ---
@@ -21,9 +21,6 @@ Steps to reproduce the behavior:
 
 **Expected Behavior:**
 A clear and concise description of what you expected to happen.
-
-**Actual Behavior:**
-A clear and concise description of what actually happened.
 
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
