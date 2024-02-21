@@ -35,7 +35,7 @@ export const LeaveServerModal = () => {
 
       onClose();
       router.refresh();
-      router.push("/");
+      router.push("/user-setup");
     } catch (error) {
       console.log(error);
 

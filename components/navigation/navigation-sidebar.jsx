@@ -14,7 +14,7 @@ export const NavigationSidebar = async () => {
   const profile = await currentProfile();
 
   if (!profile) {
-    return redirect("/");
+    return redirect("/user-setup");
   }
 
   //to find all the server this user is a part of

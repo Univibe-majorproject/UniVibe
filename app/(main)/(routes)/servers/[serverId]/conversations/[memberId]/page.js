@@ -31,7 +31,7 @@ const MemberIdPage = async ({
   });
 
   if (!currentMember) {
-    return redirect("/");
+    return redirect("/user-setup");
   }
 
   const conversation = await getOrCreateConversation(currentMember.id, params.memberId);
