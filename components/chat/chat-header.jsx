@@ -8,7 +8,7 @@ import { ChatVideoButton } from "@/components/chat/chat-video-button";
 
 export const ChatHeader = ({ serverId, name, type, imageUrl }) => {
   return (
-    <div className="text-md font-semibold px-4 flex items-center  border-x-neutral-200 dark:border-[#CBFF01] border-b-2 justify-between h-[80px]">
+    <div className="text-md font-semibold px-4 flex items-center  border-x-neutral-200 dark:border-[#CBFF01] border-b-2 justify-between h-[80px] dark:bg-[rgb(21,20,29)]">
     <div className="flex items-center justify-center">
     <MobileToggle serverId={serverId} />
       {type === "channel" && (
@@ -17,7 +17,7 @@ export const ChatHeader = ({ serverId, name, type, imageUrl }) => {
       {type === "conversation" && (
         <UserAvatar src={imageUrl} className="h-8 w-8 md:h-8 md:w-8 mr-2" />
       )}
-      <p className="font-semibold text-md text-black dark:dark:bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+      <p className="font-semibold text-md text-black dark:bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
         {name}
       </p>
         <div className="ml-auto flex items-center pl-4">

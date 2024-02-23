@@ -30,10 +30,10 @@ export const ServerHeader = ({ server, role }) => {
         <button
           className="w-full text-md font-semibold px-3 flex
                     items-center h-[100px] border-neutral-200
-                     hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition dark:bg-gradient-to-r from-blue-600 to-black"
+                     hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition dark:bg-[rgb(21,20,29)]"
         >
           {server.name}
-          <ChevronDown className="h=5 w-5 ml-auto" />
+          <ChevronDown className="h-5 w-5 ml-auto" />
         </button>
       </DropdownMenuTrigger>
 
