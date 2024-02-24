@@ -35,7 +35,7 @@ export const DeleteServerModal = () => {
 
       onClose();
       
-      router.push("/user-setup");
+      router.push("/");
       router.refresh();
     } catch (error) {
       console.log(error);

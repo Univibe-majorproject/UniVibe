@@ -1,10 +1,11 @@
 "use client";
 import React from 'react'
 import Link from 'next/link';
-
+import { useAuth } from '@clerk/clerk-react';
+import { SignOutButton } from "@clerk/nextjs";
 
 const HomePage = () => {
-
+  const { isSignedIn } = useAuth();
   return (
     <div>
       <div className="flex flex-col min-h-screen">
@@ -13,7 +14,11 @@ const HomePage = () => {
     <header className=" flex justify-between items-center px-4 py-6 w-full text-lg">
           <h1 className="text-3xl font-bold text-white">UniVibe</h1>
           <nav className="space-x-4 text-gray-400">
-            <Link href="/user-setup" className=" hover:text-gray-300">Sign In</Link>
+            {isSignedIn ? 
+            <SignOutButton>Sign Out</SignOutButton>:
+             <Link href="/user-setup" className=" hover:text-gray-300">Sign In</Link> 
+            }
+           
             <Link href="#" className="hover:text-gray-300">Contact</Link>
           </nav>
       </header>
