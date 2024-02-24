@@ -11,6 +11,21 @@ const InviteCodePage = async ({ params }) => {
     return redirect("/");
   }
 
+  //checking if any server exists with the invite code
+  const serverWithInviteCode = await db.server.findFirst({
+    where:{
+      inviteCode: params.inviteCode,
+    }
+  })
+
+  if(!serverWithInviteCode){
+    return (
+      <p className="font-bold text-2xl text-red-500 flex items-center justify-center mt-8">
+        Error! Invalid or old invite url.
+      </p>
+    )
+  }
+
   //to check if the user is already a part of this server
   const existingServer = await db.server.findFirst({
     where: {
