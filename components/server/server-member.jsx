@@ -51,7 +51,7 @@ export const ServerMember = ({
             /> 
             <p
                 className={cn(
-                    "font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-[#00FFA3]/70 dark:group-hover:text-zinc-300 transition",
+                    "truncate font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-[#00FFA3]/70 dark:group-hover:text-zinc-300 transition",
                     params?.memberId === member.id && "text-primary dark:group-hover:text-white"
                 )}
             >
