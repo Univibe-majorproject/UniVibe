@@ -42,7 +42,7 @@ export const ServerChannel = ({ channel, server, role }) => {
       <Icon className="flex-shrink-0 w-5 h-5 text-zinc-500 dark:group-hover:text-white dark:text-[rgb(205,205,223)]" />
       <p
         className={cn(
-          "line-clamp-1 font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:bg-[rgb(205,205,223)] bg-clip-text text-transparent dark:group-hover:text-white transition",
+          "truncate font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:bg-[rgb(205,205,223)] bg-clip-text text-transparent dark:group-hover:text-white transition",
           params?.channelId === channel.id &&
             "dark:bg-[rgb(205,205,223)] bg-clip-text text-transparent dark:group-hover:text-white dark:text-white"
         )}

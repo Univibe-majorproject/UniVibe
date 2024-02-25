@@ -17,7 +17,7 @@ export const ChatHeader = ({ serverId, name, type, imageUrl }) => {
       {type === "conversation" && (
         <UserAvatar src={imageUrl} className="h-8 w-8 md:h-8 md:w-8 mr-2" />
       )}
-      <p className="font-semibold text-md text-black dark:bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+      <p className="font-semibold text-md text-black dark:dark:bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent w-56 truncate">
         {name}
       </p>
         <div className="ml-auto flex items-center pl-4">

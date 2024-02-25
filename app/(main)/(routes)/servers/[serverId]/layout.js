@@ -23,7 +23,7 @@ const ServerIdLayout = async ({ children, params }) => {
   });
 
   if (!server) {
-    return redirect("/");
+    return redirect("/user-setup");
   }
 
   return (

@@ -29,7 +29,7 @@ const ChannelIdPage = async ({ params }) => {
   });
 
   if(!channel || !member){
-    redirect("/");
+    redirect("/user-setup");
   }
 
   return (
