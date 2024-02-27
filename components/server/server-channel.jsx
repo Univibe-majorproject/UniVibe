@@ -3,13 +3,13 @@
 import { useParams, useRouter } from "next/navigation";
 import { ChannelType, MemberRole } from "@prisma/client";
 
-import { Hash, Mic, Video, Edit, Trash, Lock } from "lucide-react";
+import { MessageSquareText, Mic, Video, Edit, Trash, Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ActionTooltip } from "@/components/action-tooltip";
 import { useModal } from "@/hooks/use-modal-store";
 
 const iconMap = {
-  [ChannelType.TEXT]: Hash,
+  [ChannelType.TEXT]: MessageSquareText,
   [ChannelType.AUDIO]: Mic,
   [ChannelType.VIDEO]: Video,
 };
