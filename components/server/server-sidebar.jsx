@@ -66,6 +66,10 @@ export const ServerSidebar = async ({ serverId }) => {
     (member) => member.profileId !== profile.id
   );
 
+  const feedChannels = server?.channels.filter(
+    (channel) => channel.type === ChannelType.FEED
+  );
+  
   if (!server) {
     return redirect("/user-setup");
   }
@@ -202,6 +206,27 @@ export const ServerSidebar = async ({ serverId }) => {
                 <ServerMember 
                   key={member.id}
                   member={member}
+                  server={server}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {!!feedChannels?.length && (
+          <div className="mb-2">
+            <ServerSection
+              sectionType="channels"
+              channelType={ChannelType.FEED}
+              role={role}
+              label="Feed Channels"
+            />
+            <div className="w-52 space-y-[2px]">
+              {feedChannels.map((channel) => (
+                <ServerChannel
+                  key={channel.id}
+                  channel={channel}
+                  role={role}
                   server={server}
                 />
               ))}
