@@ -7,10 +7,10 @@ import { redirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import {ChannelType} from "@prisma/client";
 import { MediaRoom } from "@/components/media-room";
+import CreatePostBtn from "@/components/feed/create-post-btn";
 
 const ChannelIdPage = async ({ params }) => {
   const profile = await currentProfile();
-
   if (!profile) {
     return redirectToSignIn();
   }
@@ -80,6 +80,12 @@ const ChannelIdPage = async ({ params }) => {
            video={true}
            audio={true}
           />
+        )}
+
+        {channel.type === ChannelType.FEED && (
+          <div className="flex items-center justify-center mt-5">
+          <CreatePostBtn />
+          </div>
         )}
     </div>
   )
