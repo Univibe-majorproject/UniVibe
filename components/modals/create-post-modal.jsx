@@ -26,6 +26,7 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea"
 import { useRouter, useParams } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
 
@@ -84,7 +85,7 @@ export const CreatePostModal = () => {
     //   console.log(error);
     // }
     try {
-        console.log("Post created");
+        console.log("Post created", values);
         onClose();
     } catch (error) {
         console.error(error);
@@ -100,7 +101,7 @@ export const CreatePostModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
-      <DialogContent className="bg-white text-black p-0 overflow-hidden">
+      <DialogContent className="bg-white text-black p-0 overflow-hidden max-w-3xl">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
             Create a new Post
@@ -119,16 +120,15 @@ export const CreatePostModal = () => {
                       className="uppercase text-xs font-bold text-zinc-500
                                 dark:text-secondary/70"
                     >
-                      Channel name
+                      Content
                     </FormLabel>
-
                     <FormControl>
-                      <Input
+                      <Textarea
                         disabled={`${isLoading}`}
-                        className="bg-zinc-300/50 border-0
-                                    focus-visible:ring-0 text-black 
-                                    focus-visible:ring-offset-0"
-                        placeholder="Enter channel name"
+                        placeholder="What do you want to talk about in the post."
+                        className="bg-zinc-400/40 border-0
+                        focus-visible:ring-0 text-black 
+                        focus-visible:ring-offset-0"
                         {...field}
                       />
                     </FormControl>
