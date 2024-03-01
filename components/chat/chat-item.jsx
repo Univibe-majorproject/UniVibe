@@ -214,12 +214,12 @@ export const ChatItem = ({
         </div>
       </div>
       {canDeleteMessage && (
-        <div className="hidden group-hover:flex items-center gap-x-2 absolute p-1 -top-2 right-5 bg-white dark:bg-zinc-800 border rounded-sm">
+        <div className="hidden group-hover:flex items-center gap-x-2 absolute p-1 top-1 right-20 bg-white dark:bg-zinc-800 border rounded-sm">
           {canEditMessage && (
             <ActionTooltip label="Edit">
               <Edit
                 onClick={() => setIsEditing(true)}
-                className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
+                className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:text-blue-500 dark:hover:text-blue-700 transition"
               />
             </ActionTooltip>
           )}
@@ -229,7 +229,7 @@ export const ChatItem = ({
                 apiUrl: `${socketUrl}/${id}`,
                 query: socketQuery,
                })}
-              className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
+              className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:text-rose-500 dark:hover:text-rose-700 transition"
             />
           </ActionTooltip>
         </div>

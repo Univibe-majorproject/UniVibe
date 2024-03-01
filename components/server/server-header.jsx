@@ -30,8 +30,8 @@ export const ServerHeader = ({ server, role }) => {
         <button
           className="truncate w-full text-md font-semibold px-3 flex
                     items-center h-[100px] border-neutral-200
-                     hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition dark:bg-gradient-to-r from-blue-600 to-black"
-        > 
+                     hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50 transition dark:bg-[rgb(21,20,29)]"
+        >
           <p className="truncate w-48">{server.name}</p>
           <ChevronDown className="h-6 w-6 ml-auto text-blue-500 hover:scale-150" />
         </button>

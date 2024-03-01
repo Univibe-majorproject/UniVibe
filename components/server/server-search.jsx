@@ -69,7 +69,7 @@ export const ServerSearch = ({ data }) => {
           <span className="text-xs">CTRL</span>K
         </kbd>
       </button>
-      <CommandDialog open={open} onOpenChange={setOpen}>
+      <CommandDialog open={open} onOpenChange={setOpen} >
         <CommandInput placeholder="Search all channels and members" />
         <CommandList>
           <CommandEmpty>No Results found</CommandEmpty>

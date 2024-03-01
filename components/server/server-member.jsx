@@ -18,8 +18,8 @@ import { UserAvatar } from "@/components/user-avatar";
 
 const roleIconMap = {
     [MemberRole.GUEST]: null,
-    [MemberRole.MODERATOR]: <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500"/>,
-    [MemberRole.ADMIN]: <ShieldAlert className="h-4 w-4 ml-2 text-rose-500"/>,
+    [MemberRole.MODERATOR]: <ShieldCheck className="h-4 w-4 ml-1 text-indigo-500"/>,
+    [MemberRole.ADMIN]: <ShieldAlert className="h-4 w-4 ml-1 text-rose-500"/>,
 
 }
 
@@ -41,8 +41,8 @@ export const ServerMember = ({
         <button
             onClick={onClick}
             className={cn(
-                "group px-2 py-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/10 dark:hover:bg-gradient-to-r from-teal-600 to-black transition mb-1",
-                params?.memberId === member.id && "bg-gradient-to-r from-teal-600 to-black"
+                "group px-2 py-2 rounded-md flex items-center gap-x-2 w-full hover:bg-zinc-700/10 dark:hover:bg-gradient-to-r from-purple-600 to-black  transition mb-1",
+                params?.memberId === member.id && "bg-gradient-to-r from-purple-600 to-black text-white"
             )}
         >
            <UserAvatar 
@@ -51,8 +51,8 @@ export const ServerMember = ({
             /> 
             <p
                 className={cn(
-                    "truncate font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-[#00FFA3]/70 dark:group-hover:text-zinc-300 transition",
-                    params?.memberId === member.id && "text-primary dark:group-hover:text-white"
+                    "truncate font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-[rgb(205,205,223)] dark:group-hover:text-white transition w-32",
+                    params?.memberId === member.id && "text-primary dark:text-white dark:group-hover:text-white"
                 )}
             >
                 {member.profile.name}

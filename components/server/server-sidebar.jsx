@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 import { ChannelType, MemberRole } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Hash, Mic, Video, ShieldCheck, ShieldAlert } from "lucide-react";
+import { MessageSquareText, Mic, Video, ShieldCheck, ShieldAlert } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { ServerSearch } from "./server-search";
 import { ServerHeader } from "./server-header";
@@ -12,7 +12,7 @@ import { ServerChannel } from "./server-channel";
 import { ServerMember } from "./server-member";
 
 const iconMap = {
-  [ChannelType.TEXT]: <Hash className="mr-2 h-4 w-4" />,
+  [ChannelType.TEXT]: <MessageSquareText className="mr-2 h-4 w-4" />,
   [ChannelType.AUDIO]: <Mic className="mr-2 h-4 w-4" />,
   [ChannelType.VIDEO]: <Video className="mr-2 h-4 w-4" />,
 };
@@ -81,7 +81,7 @@ export const ServerSidebar = async ({ serverId }) => {
   return (
     <div
       className="flex flex-col h-full text-primary w-full 
-        dark:bg-black bg-[#F2F3F5] px-3"
+        dark:bg-[rgb(21,20,29)] bg-[#F2F3F5] px-3"
     >
       <ServerHeader server={server} role={role} />
 
