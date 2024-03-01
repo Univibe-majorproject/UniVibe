@@ -20,7 +20,11 @@ export async function POST(req) {
         imageUrl,
         inviteCode: uuidv4(),
         channels: {
-          create: [{ name: "general", profileId: profile.id }],
+          create: [
+            { name: "general", profileId: profile.id },
+            { name: "general", type: "AUDIO", profileId: profile.id },
+            { name: "general", type: "VIDEO", profileId: profile.id },
+          ],
         },
         members: {
           create: [{ profileId: profile.id, role: MemberRole.ADMIN }],

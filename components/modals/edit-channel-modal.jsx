@@ -46,7 +46,8 @@ const formSchema = z.object({
     }).max(25,{
       message: "Channel name cannot exceed 25 characters."
     })
-    .refine((name) => name !== "general", {
+    .refine(
+      (name) => name.toLowerCase().trim() !== "general", {
       message: "Channel name cannot be 'general'",
     }),
 

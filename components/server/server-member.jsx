@@ -18,8 +18,8 @@ import { UserAvatar } from "@/components/user-avatar";
 
 const roleIconMap = {
     [MemberRole.GUEST]: null,
-    [MemberRole.MODERATOR]: <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500"/>,
-    [MemberRole.ADMIN]: <ShieldAlert className="h-4 w-4 ml-2 text-rose-500"/>,
+    [MemberRole.MODERATOR]: <ShieldCheck className="h-4 w-4 ml-1 text-indigo-500"/>,
+    [MemberRole.ADMIN]: <ShieldAlert className="h-4 w-4 ml-1 text-rose-500"/>,
 
 }
 
@@ -51,8 +51,8 @@ export const ServerMember = ({
             /> 
             <p
                 className={cn(
-                    "truncate font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-[rgb(205,205,223)] dark:group-hover:text-white transition",
-                    params?.memberId === member.id && "dark:text-white dark:group-hover:text-white"
+                    "truncate font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-[rgb(205,205,223)] dark:group-hover:text-white transition w-32",
+                    params?.memberId === member.id && "text-primary dark:text-white dark:group-hover:text-white"
                 )}
             >
                 {member.profile.name}
