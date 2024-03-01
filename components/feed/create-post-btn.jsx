@@ -10,7 +10,7 @@ const CreatePostBtn = () => {
     <button
       type="button"
       onClick={() => onOpen("createPost")}
-      className="bg-purple-500 rounded-full text-lg font-bold w-56"
+      className="bg-purple-500 rounded-full text-lg font-bold w-56 sticky top-0 mb-4"
     >
       Create Post
     </button>

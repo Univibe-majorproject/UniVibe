@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import {ChannelType} from "@prisma/client";
 import { MediaRoom } from "@/components/media-room";
 import CreatePostBtn from "@/components/feed/create-post-btn";
+import FeedPosts from "@/components/feed/feed-posts";
 
 const ChannelIdPage = async ({ params }) => {
   const profile = await currentProfile();
@@ -83,8 +84,9 @@ const ChannelIdPage = async ({ params }) => {
         )}
 
         {channel.type === ChannelType.FEED && (
-          <div className="flex items-center justify-center mt-5">
-          <CreatePostBtn />
+          <div className="flex-1 flex flex-col py-4 overflow-y-auto relative left-8">
+            <CreatePostBtn />
+            <FeedPosts/>
           </div>
         )}
     </div>
