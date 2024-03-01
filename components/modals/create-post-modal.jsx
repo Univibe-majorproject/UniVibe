@@ -3,7 +3,6 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { ChannelType } from "@prisma/client";
 import qs from "query-string";
 import { FileUpload } from "@/components/file-upload";
 
@@ -30,17 +29,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { useRouter, useParams } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
 
-
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { useEffect } from "react";
-
-
 //creating our form schema
 const formSchema = z.object({
   content: z.string().min(1, {
@@ -51,7 +39,6 @@ const formSchema = z.object({
 
 export const CreatePostModal = () => {
   const { isOpen, onClose, type, data } = useModal();
-  const { channelType } = data;
   const router = useRouter();
   const params = useParams();
 
@@ -68,29 +55,23 @@ export const CreatePostModal = () => {
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values) => {
-    // try {
-    //   const url = qs.stringifyUrl({
-    //     url: "/api/channels",
-    //     query: {
-    //       serverId: params?.serverId,
-    //     }
-    //   })
-
-    //   await axios.post(url, values);
-
-    //   form.reset();
-    //   router.refresh();
-    //   onClose();
-    // } catch (error) {
-    //   console.log(error);
-    // }
     try {
-        console.log("Post created", values);
-        onClose();
+      const url = qs.stringifyUrl({
+        url: "/api/socket/posts",
+        query: {
+          serverId: params?.serverId,
+          channelId: params?.channelId,
+        }
+      })
+
+      await axios.post(url, values);
+      
+      form.reset();
+      router.refresh();
+      onClose();
     } catch (error) {
-        console.error(error);
-    }
-    
+      console.log(error);
+    }    
   };
 
   //custom on close function
