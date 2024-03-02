@@ -86,7 +86,20 @@ const ChannelIdPage = async ({ params }) => {
         {channel.type === ChannelType.FEED && (
           <div className="flex-1 flex flex-col py-4 overflow-y-auto relative left-8">
             <CreatePostBtn />
-            <FeedPosts />
+            <FeedPosts 
+            member={member}
+            name={channel.name}
+            chatId={channel.id}
+            type="channel"
+            apiUrl="/api/posts"
+            socketUrl="/api/socket/posts"
+            socketQuery={{
+              channelId:channel.id,
+              serverId:channel.serverId,
+            }}
+            paramKey="channelId"
+            paramValue={channel.id}
+            />
           </div>
         )}
     </div>

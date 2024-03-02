@@ -4,10 +4,13 @@ import Image from "next/image";
 import {FileIcon} from 'lucide-react';
 
 const PostCard = ({
-    member,
-    content,
-    fileUrl,
-    timestamp
+  id,
+  content,
+  member,
+  timestamp,
+  fileUrl,
+  socketUrl,
+  socketQuery,
 }) => {
 
   const fileType = fileUrl?.split(".").pop();
