@@ -1,7 +1,10 @@
 import React from 'react'
 import { db } from "@/lib/db";
+import PostCard from './post-card';
+import { format } from "date-fns";
 
 const FeedPosts = async () => {
+  const DATE_FORMAT = "d MMM yyyy, HH:mm";
 
    const posts = await db.post.findMany({
     include: {
@@ -19,10 +22,13 @@ const FeedPosts = async () => {
     <div className="space-y-4 p-4 m-4">
         {posts?.map((post)=>{
             return (
-                <div className='bg-zinc-400/20 p-4 m-2 space-y-2' key={post.id}>
-                   <h1> {post.content} </h1>
-                    <img src={post.fileUrl} alt="Img here" className='w-12 h-12'/>
-                </div>
+              <PostCard
+              key={post.id}
+              member={post.member}
+              content={post.content}
+              fileUrl={post.fileUrl}
+              timestamp={format(new Date(post.createdAt), DATE_FORMAT)}
+              />
             )
         })}
     </div>

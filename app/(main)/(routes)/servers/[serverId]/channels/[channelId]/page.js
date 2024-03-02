@@ -86,7 +86,7 @@ const ChannelIdPage = async ({ params }) => {
         {channel.type === ChannelType.FEED && (
           <div className="flex-1 flex flex-col py-4 overflow-y-auto relative left-8">
             <CreatePostBtn />
-            <FeedPosts/>
+            <FeedPosts />
           </div>
         )}
     </div>
