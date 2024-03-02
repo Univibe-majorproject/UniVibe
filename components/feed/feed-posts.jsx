@@ -76,10 +76,12 @@ const FeedPosts = ({
               <PostCard
                 key={post.id}
                 id={post.id}
+                currentMember={member}
                 member={post.member}
                 content={post.content}
                 fileUrl={post.fileUrl}
                 timestamp={format(new Date(post.createdAt), DATE_FORMAT)}
+                isUpdated={post.updatedAt !== post.createdAt}
                 socketUrl={socketUrl}
                 socketQuery={socketQuery}
               />
