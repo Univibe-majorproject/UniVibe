@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { db } from "@/lib/db";
 import axios from "axios";
+import {useRouter, useParams} from "next/navigation";
 import qs from "query-string";
 import { UserAvatar } from "@/components/user-avatar";
 import Image from "next/image";
@@ -35,6 +36,8 @@ const PostCard = ({
   socketQuery,
 }) => {
   const { onOpen } = useModal();
+  const params = useParams();
+  const router = useRouter();
 
   const fileType = fileUrl?.split(".").pop();
   const isPDF = fileType === "pdf" && fileUrl;
@@ -88,6 +91,11 @@ const PostCard = ({
     }
   }
 
+  const onCommentClick = () => {
+    
+    router.push(`/servers/${params?.serverId}/channels/${params?.channelId}/posts/${id}`);
+  }
+  
   return (
     <div className="p-4 m-4 flex flex-col space-y-4 bg-[rgb(21,20,29)]">
       <div className="flex justify-between">
@@ -200,7 +208,8 @@ const PostCard = ({
           )}
           <p className="text-xl ml-3">{totalLikes}</p>
         </button>
-        <button className="hover:shadow-md rounded-lg transition hover:scale-105  text-white font-semibold p-2 m-2 border-x-4 border-x-yellow-200 flex justify-center group">
+        <button className="hover:shadow-md rounded-lg transition hover:scale-105  text-white font-semibold p-2 m-2 border-x-4 border-x-yellow-200 flex justify-center group" 
+        onClick={onCommentClick}>
           <MessageCircle className="h-6 w-6 group-hover:scale-105" />
         </button>
       </div>
