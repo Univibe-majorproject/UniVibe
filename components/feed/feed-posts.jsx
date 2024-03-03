@@ -24,6 +24,7 @@ const FeedPosts = ({
   const queryKey = `chat:${chatId}`;
   const addKey = `chat:${chatId}:posts`;
   const updateKey = `chat:${chatId}:posts:update`;
+  const deleteKey = `chat:${chatId}:posts:delete`;
 
   const chatRef = useRef(null);
   const bottomRef = useRef(null);
@@ -36,7 +37,7 @@ const FeedPosts = ({
       paramValue,
     });
 
-  useChatSocket({ queryKey, addKey, updateKey });
+  useChatSocket({ queryKey, addKey, updateKey , deleteKey});
   useChatScroll({
     chatRef,
     bottomRef,
@@ -72,7 +73,7 @@ const FeedPosts = ({
       <div className="flex flex-col mt-auto">
         {data?.pages?.map((group, i) => (
           <Fragment key={i}>
-            {group.items.map((post) => (
+            {group?.items?.map((post) => (
               <PostCard
                 key={post.id}
                 id={post.id}

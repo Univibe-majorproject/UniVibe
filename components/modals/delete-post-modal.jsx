@@ -20,32 +20,27 @@ export const DeletePostModal = () => {
   const { isOpen, onClose, type, data } = useModal();
   const router = useRouter();
 
-
   const isModalOpen = isOpen && type === "deletePost";
-  const { postId } = data;
-
+  const {apiUrl,query} = data;
   const [isLoading, setIsLoading] = useState(false);
 
   const onClick = async () => {
-    // try {
-    //   setIsLoading(true);
-    //   const url = qs.stringifyUrl({
-    //     url: `/api/channels/${channel?.id}`,
-    //     query:{
-    //       serverId: server?.id,
-    //     }
-    //   })
+    try {
+      setIsLoading(true);
+      const url = qs.stringifyUrl({
+        url: apiUrl || "",
+        query,
+      })
 
-    //   await axios.delete(url);
+      await axios.delete(url);
 
-    //   onClose();
-    //   router.push(`/servers/${server?.id}`);
-    //   router.refresh();
-    // } catch (error) {
-    //   console.log(error);
-    // } finally {
-    //   setIsLoading(false);
-    // }
+      router.refresh();
+      onClose();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

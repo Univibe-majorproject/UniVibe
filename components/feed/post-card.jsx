@@ -64,7 +64,14 @@ const PostCard = ({
           >
             {isOwner && 
             <DropdownMenuItem
-            onClick={() => onOpen("editPost", {postId: id,content, fileUrl})}
+            onClick={() => onOpen("editPost", 
+            {
+            postId:id,
+            content, 
+            fileUrl,
+            apiUrl: `${socketUrl}/${id}`,
+            query: socketQuery
+            })}
             className="text-indigo-600 dark:text-indigo-400 px-3
                          text-sm cursor-pointer"
           >
@@ -73,7 +80,10 @@ const PostCard = ({
           </DropdownMenuItem>
           }
             <DropdownMenuItem
-              onClick={() => onOpen("deletePost",{postId:id})}
+              onClick={() => onOpen("deletePost",{
+              apiUrl: `${socketUrl}/${id}`,
+              query: socketQuery
+              })}
               className="px-3 text-sm cursor-pointer dark:text-rose-400"
             >
               Delete Post
@@ -85,7 +95,7 @@ const PostCard = ({
           }
         </div>
         <div className="flex flex-col items-center justify-center w-full h-full">
-            <p>
+            <p className='flex flex-wrap w-full'>
                 {content}
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam officiis adipisci, doloremque soluta dolores perspiciatis voluptatem. Suscipit, autem doloremque voluptatibus perspiciatis soluta ea sapiente ducimus, eius ex, exercitationem iusto quos.
             </p>
@@ -111,7 +121,7 @@ const PostCard = ({
                 href={fileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-2 text-sm text-indigo-500 dark:text-indigo-400 hover:underline"
+                className="ml-2 text-sm text-indigo-500 dark:text-indigo-400 hover:underline object-contain"
               >
                 PDF File
               </a>

@@ -41,10 +41,9 @@ const formSchema = z.object({
 export const EditPostModal = () => {
   const { isOpen, onClose, type, data } = useModal();
   const router = useRouter();
-  const params = useParams();
-
+  
   const isModalOpen = isOpen && type === "editPost";
-  const { postId, content, fileUrl } = data;
+  const { postId, content, fileUrl, apiUrl, query } = data;
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -66,14 +65,11 @@ export const EditPostModal = () => {
   const onSubmit = async (values) => {
     try {
       const url = qs.stringifyUrl({
-        url: "/api/socket/posts",
-        query: {
-          serverId: params?.serverId,
-          channelId: params?.channelId,
-        }
+        url: apiUrl || "",
+        query,
       })
 
-      await axios.post(url, values);
+      await axios.patch(url, values);
       
       form.reset();
       router.refresh();
@@ -144,7 +140,7 @@ export const EditPostModal = () => {
             </div>
             <DialogFooter className={"bg-grey-100 px-6 py-4"}>
               <Button disable={`${isLoading}`} variant="primary">
-                Create
+                Save
               </Button>
             </DialogFooter>
           </form>
