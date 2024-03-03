@@ -9,6 +9,7 @@ import {ChannelType} from "@prisma/client";
 import FeedPosts from "@/components/feed/feed-posts";
 import PostCard from "@/components/feed/post-card";
 import { format } from "date-fns";
+import CommentInput from "@/components/feed/comment-input";
 
 const DATE_FORMAT = "d MMM yyyy, HH:mm";
 
@@ -57,7 +58,7 @@ const PostIdPage = async ({ params }) => {
         serverId={channel.serverId}
         type="post"
         />
-        
+
         {channel.type === ChannelType.FEED && (
           <div className="flex-1 flex flex-col py-4 overflow-y-auto relative left-8">
             <PostCard
@@ -75,6 +76,7 @@ const PostIdPage = async ({ params }) => {
                     channelId:channel.id,
                 }}
               />
+              <CommentInput/>
           </div>
         )}
     </div>
