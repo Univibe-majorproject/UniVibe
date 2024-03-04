@@ -93,20 +93,17 @@ const CommentCard = ({
                   className="text-indigo-600 dark:text-indigo-400 px-3
                          text-sm cursor-pointer"
                 >
-                  Edit Post
+                  Edit Comment
                   <Edit className="h-4 w-4 ml-auto" />
                 </DropdownMenuItem>
               )}
               <DropdownMenuItem
-                // onClick={() =>
-                //   onOpen("deletePost", {
-                //     apiUrl: `${socketUrl}/${id}`,
-                //     query: socketQuery,
-                //   })
-                // }
+                onClick={() =>
+                  onOpen("deleteComment")
+                }
                 className="px-3 text-sm cursor-pointer dark:text-rose-400"
               >
-                Delete Post
+                Delete Comment
                 <Trash className="h-4 w-4 ml-auto" />
               </DropdownMenuItem>
             </DropdownMenuContent>
