@@ -84,7 +84,6 @@ const PostCard = ({
   
         const {data} = await axios.get(url);
         setTotalComments(data.totalComments);
-        console.log("Display Comments: ",data);
       } catch (error) {
         console.error(error);
       }

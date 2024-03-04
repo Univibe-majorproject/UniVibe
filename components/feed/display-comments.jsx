@@ -24,13 +24,13 @@ const DisplayComments = ({serverId, channelId, postId, member, currentMember}) =
       
             const {data} = await axios.get(url);
             setComments(data.comments);
-            console.log("Display Comments: ",data);
           } catch (error) {
             console.error(error);
           }
         }
         fetchComments();
       }, [comments]);
+      
   return (
     <div>
         {comments.length === 0 && 
@@ -45,7 +45,11 @@ const DisplayComments = ({serverId, channelId, postId, member, currentMember}) =
                 timestamp={format(new Date(comment.createdAt), DATE_FORMAT)}
                 currentMember={currentMember}
                 isUpdated={comment.isUpdated}
+                isdeleted={comment.deleted}
                 postOwner={member}
+                serverId={serverId}
+                channelId={channelId}
+                postId={postId}
                 />
             )
         })}

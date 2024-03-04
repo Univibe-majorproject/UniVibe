@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { db } from "@/lib/db";
 import axios from "axios";
-import {useRouter, useParams} from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import qs from "query-string";
 import { UserAvatar } from "@/components/user-avatar";
 import Image from "next/image";
@@ -25,13 +25,17 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const CommentCard = ({
-    id,
-    comment,
-    postOwner,
-    commentOwner,
-    timestamp,
-    currentMember,
-    isUpdated
+  id,
+  comment,
+  postOwner,
+  commentOwner,
+  timestamp,
+  currentMember,
+  isdeleted,
+  isUpdated,
+  serverId,
+  channelId,
+  postId,
 }) => {
   const { onOpen } = useModal();
   const params = useParams();
@@ -51,7 +55,9 @@ const CommentCard = ({
             className="w-12 h-12 flex"
           />
           <div className="flex flex-col text-white font-bold ">
-            <h1 className="text-md text-purple-600">{commentOwner.profile.name}</h1>
+            <h1 className="text-md text-purple-600">
+              {commentOwner.profile.name}
+            </h1>
             <small className="text-zinc-300 font-normal">
               {commentOwner.profile.heading} Incoming SWE Intern at Amazon
             </small>
@@ -59,9 +65,8 @@ const CommentCard = ({
               {" "}
               Posted At : {timestamp}
             </small>
-            <p className="flex flex-wrap w-full mt-4 font-normal">
-                {comment}
-            </p>
+            {isdeleted ? <p className="flex flex-wrap w-full mt-4 font-light italic text-zinc-300">{comment}</p> :<p className="flex flex-wrap w-full mt-4 font-normal">{comment}</p> }
+            
           </div>
         </div>
         {(isPostOwner || isCommentOwner) && (
@@ -81,15 +86,15 @@ const CommentCard = ({
             >
               {isCommentOwner && (
                 <DropdownMenuItem
-                //   onClick={() =>
-                //     onOpen("editPost", {
-                //       postId: id,
-                //       content,
-                //       fileUrl,
-                //       apiUrl: `${socketUrl}/${id}`,
-                //       query: socketQuery,
-                //     })
-                //   }
+                  //   onClick={() =>
+                  //     onOpen("editPost", {
+                  //       postId: id,
+                  //       content,
+                  //       fileUrl,
+                  //       apiUrl: `${socketUrl}/${id}`,
+                  //       query: socketQuery,
+                  //     })
+                  //   }
                   className="text-indigo-600 dark:text-indigo-400 px-3
                          text-sm cursor-pointer"
                 >
@@ -99,7 +104,15 @@ const CommentCard = ({
               )}
               <DropdownMenuItem
                 onClick={() =>
-                  onOpen("deleteComment")
+                  onOpen("deleteComment", {
+                    apiUrl: `/api/posts/comments/${id}`,
+                    query: {
+                      serverId,
+                      channelId,
+                      postId,
+                      commentId: id,
+                    },
+                  })
                 }
                 className="px-3 text-sm cursor-pointer dark:text-rose-400"
               >
