@@ -44,7 +44,7 @@ const DisplayComments = ({serverId, channelId, postId, member, currentMember}) =
                 commentOwner={comment.member}
                 timestamp={format(new Date(comment.createdAt), DATE_FORMAT)}
                 currentMember={currentMember}
-                isUpdated={comment.isUpdated}
+                isUpdated={comment.updatedAt !== comment.createdAt}
                 isdeleted={comment.deleted}
                 postOwner={member}
                 serverId={serverId}
