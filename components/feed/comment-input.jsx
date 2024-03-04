@@ -82,14 +82,15 @@ const CommentInput = ({currentMember, serverId, channelId, postId}) => {
                 </FormItem>
               )}
             />
+            <Button
+              disable={`${isLoading}`}
+              className="bg-purple-800 text-zinc-300 relative -top-24 hover:bg-purple-900 rounded-full p-6 w-fit ml-96 left-52"
+            >
+              <SendHorizontal/>
+            </Button>
           </div>
         </form>
       </Form>
-      <Button
-          disable={`${isLoading}`}
-          className="bg-purple-800 text-zinc-300 relative -top-16 hover:bg-purple-900 rounded-full p-6 left-96 z-10">
-          <SendHorizontal/>
-      </Button>
     </div>
   );
 };
