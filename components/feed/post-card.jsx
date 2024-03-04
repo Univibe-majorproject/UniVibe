@@ -207,6 +207,7 @@ const PostCard = ({
         <button className="hover:shadow-md rounded-lg transition hover:scale-105  text-white font-semibold p-2 m-2 border-x-4 border-x-yellow-200 flex justify-center group" 
         onClick={onCommentClick}>
           <MessageCircle className="h-6 w-6 group-hover:scale-105" />
+          {/* <p className="text-xl ml-3">{totalComments}</p> */}
         </button>
       </div>
     </div>
