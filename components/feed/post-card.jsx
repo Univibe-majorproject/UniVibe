@@ -49,6 +49,7 @@ const PostCard = ({
 
   const [postLiked, setPostLiked] = useState(false);
   const [totalLikes, setTotalLikes] = useState(0);
+  const [totalComments, setTotalComments] = useState(0);
 
   useEffect(() => {
     const fetchPostLike = async()=>{
@@ -69,9 +70,29 @@ const PostCard = ({
         console.error(error);
       }
     }
+
+    const fetchComments = async()=>{
+      try {
+        const url = qs.stringifyUrl({
+          url: `/api/posts/comments`,
+          query: {
+            channelId:socketQuery.channelId,
+            serverId:socketQuery.serverId,
+            postId:id,
+          },
+        });
+  
+        const {data} = await axios.get(url);
+        setTotalComments(data.totalComments);
+        console.log("Display Comments: ",data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchComments();
     fetchPostLike();
     
-  }, [postLiked]);
+  });
   
   const handleLikeClick = async()=> {
     try {
@@ -207,7 +228,7 @@ const PostCard = ({
         <button className="hover:shadow-md rounded-lg transition hover:scale-105  text-white font-semibold p-2 m-2 border-x-4 border-x-yellow-200 flex justify-center group" 
         onClick={onCommentClick}>
           <MessageCircle className="h-6 w-6 group-hover:scale-105" />
-          {/* <p className="text-xl ml-3">{totalComments}</p> */}
+          <p className="text-xl ml-3">{totalComments}</p>
         </button>
       </div>
     </div>

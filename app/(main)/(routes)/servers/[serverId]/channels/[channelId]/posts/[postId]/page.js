@@ -10,6 +10,7 @@ import FeedPosts from "@/components/feed/feed-posts";
 import PostCard from "@/components/feed/post-card";
 import { format } from "date-fns";
 import CommentInput from "@/components/feed/comment-input";
+import DisplayComments from "@/components/feed/display-comments";
 
 const DATE_FORMAT = "d MMM yyyy, HH:mm";
 
@@ -79,6 +80,13 @@ const PostIdPage = async ({ params }) => {
             serverId={channel.serverId}
             channelId={channel.id}
             postId={post.id}
+          />
+          <DisplayComments
+          serverId={channel.serverId}
+          channelId={channel.id}
+          postId={post.id}
+          currentMember={member}
+          member={post.member}
           />
         </div>
       )}

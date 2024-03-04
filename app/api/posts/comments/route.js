@@ -173,6 +173,9 @@ export async function GET(req) {
             profile:true,
           }
         }
+      },
+      orderBy: {
+        createdAt: "desc",
       }
     });
 
