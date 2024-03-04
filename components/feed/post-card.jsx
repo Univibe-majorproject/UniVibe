@@ -167,10 +167,6 @@ const PostCard = ({
       <div className="flex flex-col items-center justify-center w-full h-full">
         <p className="flex flex-wrap w-full">
           {content}
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam
-          officiis adipisci, doloremque soluta dolores perspiciatis voluptatem.
-          Suscipit, autem doloremque voluptatibus perspiciatis soluta ea
-          sapiente ducimus, eius ex, exercitationem iusto quos.
         </p>
         {isImage && (
           <a
