@@ -117,7 +117,7 @@ const PostCard = ({
   }
   
   return (
-    <div className="p-4 m-4 flex flex-col space-y-4 bg-[rgb(21,20,29)]">
+    <div className="p-4 mx-4 mb-4 flex flex-col space-y-4 bg-[rgb(21,20,29)]">
       <div className="flex justify-between">
         <div className="flex space-x-4 p-4">
           <UserAvatar

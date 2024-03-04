@@ -59,22 +59,25 @@ const PostIdPage = async ({ params }) => {
       <ChatHeader name={"Post Page"} serverId={channel.serverId} type="post" />
 
       {channel.type === ChannelType.FEED && (
-        <div className="flex-1 flex flex-col py-4 overflow-y-auto relative left-8">
-          <PostCard
-            key={post.id}
-            id={post.id}
-            currentMember={member}
-            member={post.member}
-            content={post.content}
-            fileUrl={post.fileUrl}
-            timestamp={format(new Date(post.createdAt), DATE_FORMAT)}
-            isUpdated={post.updatedAt !== post.createdAt}
-            socketUrl="/api/socket/posts"
-            socketQuery={{
-              serverId: channel.serverId,
-              channelId: channel.id,
-            }}
-          />
+        <div className="flex flex-1 flex-col py-4 overflow-y-auto relative left-8">
+          <div className="sticky top-0 z-10">
+            <PostCard
+              key={post.id}
+              id={post.id}
+              currentMember={member}
+              member={post.member}
+              content={post.content}
+              fileUrl={post.fileUrl}
+              timestamp={format(new Date(post.createdAt), DATE_FORMAT)}
+              isUpdated={post.updatedAt !== post.createdAt}
+              socketUrl="/api/socket/posts"
+              socketQuery={{
+                serverId: channel.serverId,
+                channelId: channel.id,
+              }}
+            />
+          </div>
+          
           <CommentInput
             currentMember={member}
             serverId={channel.serverId}

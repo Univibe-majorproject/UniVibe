@@ -61,7 +61,7 @@ const CommentInput = ({currentMember, serverId, channelId, postId}) => {
 
   return (
     <div>
-    <UserAvatar src={currentMember.profile.imageUrl} className="h-12 w-12 absolute left-10 bottom-[46%]"/>
+    <UserAvatar src={currentMember.profile.imageUrl} className="h-12 w-12 relative left-10 -bottom-16"/>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <div className="space-y-8 px-6 z-20">
@@ -82,15 +82,14 @@ const CommentInput = ({currentMember, serverId, channelId, postId}) => {
                 </FormItem>
               )}
             />
-            <Button
-              disable={`${isLoading}`}
-              className="bg-purple-800 text-zinc-300 absolute right-10 bottom-[46%] hover:bg-purple-900 rounded-full p-6"
-            >
-              <SendHorizontal/>
-            </Button>
           </div>
         </form>
       </Form>
+      <Button
+          disable={`${isLoading}`}
+          className="bg-purple-800 text-zinc-300 relative -top-16 hover:bg-purple-900 rounded-full p-6 left-96 z-10">
+          <SendHorizontal/>
+      </Button>
     </div>
   );
 };

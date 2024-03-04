@@ -34,7 +34,7 @@ const DisplayComments = ({serverId, channelId, postId, member, currentMember}) =
   return (
     <div>
         {comments.length === 0 && 
-        <p className='ml-8 text-zinc-400 mt-4'>No comments on this post...</p>}
+        <p className='ml-8 text-zinc-400'>No comments on this post...</p>}
         {comments?.map((comment)=>{
             return(
                 <CommentCard
