@@ -175,7 +175,7 @@ const CommentCard = ({
                     )}
                   />
               <span className="text-[10px] mt-1 text-zinc-400">
-                Press escape to cancel, enter to save <br/>
+                Press escape to cancel <br/>
               </span>
               <Button disabled={isLoading} size="sm" className="bg-purple-700 my-4">
                     Save
