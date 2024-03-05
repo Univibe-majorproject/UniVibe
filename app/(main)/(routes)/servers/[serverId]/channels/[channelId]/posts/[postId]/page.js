@@ -60,7 +60,7 @@ const PostIdPage = async ({ params }) => {
 
       {channel.type === ChannelType.FEED && (
         <div className="flex flex-1 flex-col py-4 overflow-y-auto relative left-8">
-          <div className="sticky top-0 z-10">
+          <div className="top-0 z-10 max-w-5xl">
             <PostCard
               key={post.id}
               id={post.id}

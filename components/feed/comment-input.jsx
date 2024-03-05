@@ -60,21 +60,21 @@ const CommentInput = ({currentMember, serverId, channelId, postId}) => {
   const isLoading = form.formState.isSubmitting;
 
   return (
-    <div>
-    <UserAvatar src={currentMember.profile.imageUrl} className="h-12 w-12 relative left-10 -bottom-16"/>
+    <div className="max-w-5xl">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <div className="space-y-8 px-6 z-20">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex w-full">
+          <div className="space-y-8 px-6 z-20 w-full flex justify-start items-center">
+          <UserAvatar src={currentMember.profile.imageUrl} className="h-12 w-12 scale-150 relative -right-4 top-2"/>
             <FormField
               control={form.control}
               name="comment"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="w-full">
                   <FormControl>
                     <Textarea
                       disabled={`${isLoading}`}
                       placeholder="Add a comment to this post..."
-                      className="px-24 pt-7 border-yellow-400 rounded-3xl outline-4 outline outline-[rgb(168,154,251)] border-2 h-full w-full transition"
+                      className="pr-28 pl-12 pt-4 border-yellow-400 rounded-3xl outline-1 outline outline-[rgb(168,154,251)] border-2 h-full w-full transition ml-16"
                       {...field}
                     />
                   </FormControl>
@@ -84,7 +84,7 @@ const CommentInput = ({currentMember, serverId, channelId, postId}) => {
             />
             <Button
               disable={`${isLoading}`}
-              className="bg-purple-800 text-zinc-300 relative -top-24 hover:bg-purple-900 rounded-full p-6 w-fit ml-96 left-52"
+              className="bg-purple-800 text-zinc-300 hover:bg-purple-900 rounded-full p-6 w-fit relative -left-8"
             >
               <SendHorizontal/>
             </Button>

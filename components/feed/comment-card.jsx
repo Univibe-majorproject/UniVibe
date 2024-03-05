@@ -76,7 +76,7 @@ const CommentCard = ({
 
     window.addEventListener("keydown", handleKeyDown);
 
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keyDown", handleKeyDown);
   }, []);
 
 

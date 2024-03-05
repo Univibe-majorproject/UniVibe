@@ -32,7 +32,7 @@ const DisplayComments = ({serverId, channelId, postId, member, currentMember}) =
       }, [comments]);
       
   return (
-    <div>
+    <div className='max-w-5xl'>
         {comments.length === 0 && 
         <p className='ml-8 text-zinc-400'>No comments on this post...</p>}
         {comments?.map((comment)=>{
