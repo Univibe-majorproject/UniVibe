@@ -50,7 +50,7 @@ export const ServerChannel = ({ channel, server, role }) => {
       >
         {channel.name}
       </p>
-      {channel.name !== "general" && role !== MemberRole.GUEST && (
+      {(channel.name !== "general" && channel.name !="feed") && role !== MemberRole.GUEST && (
         <div className="ml-auto flex items-center gap-x-2">
           <ActionTooltip label="Edit">
             <Edit
@@ -67,7 +67,7 @@ export const ServerChannel = ({ channel, server, role }) => {
         </div>
       )}
 
-      {channel.name === "general" && (
+      {(channel.name === "general" || channel.name === "feed") && (
         <Lock className="ml-auto w-4 h-4 text-zinc-500 dark:text-rose-600/50" />
       )}
     </button>
