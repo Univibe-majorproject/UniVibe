@@ -5,6 +5,7 @@ import { useSocket } from "@/components/providers/socket-provider";
 export const useChatSocket = ({
   addKey,
   updateKey,
+  deleteKey,
   queryKey
 }) => {
   const { socket } = useSocket();
@@ -67,9 +68,30 @@ export const useChatSocket = ({
       });
     });
 
+    socket.on(deleteKey, (message) => { 
+      queryClient.setQueryData([queryKey], (oldData) => {
+        if (!oldData || !oldData.pages || oldData.pages.length === 0) {
+          return oldData;
+        }
+
+        const newData = oldData.pages.map((page) => {
+          return {
+            ...page,
+            items: page.items.filter((item) => item.id !== message.id), 
+          };
+        });
+
+        return {
+          ...oldData,
+          pages: newData,
+        };
+      });
+    });
+
     return () => {
       socket.off(addKey);
       socket.off(updateKey);
+      socket.off(deleteKey);
     }
-  }, [queryClient, addKey, queryKey, socket, updateKey]);
+  }, [queryClient, addKey, queryKey, socket, updateKey,deleteKey]);
 }

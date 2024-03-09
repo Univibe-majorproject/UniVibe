@@ -24,6 +24,8 @@ export async function POST(req) {
             { name: "general", profileId: profile.id },
             { name: "general", type: "AUDIO", profileId: profile.id },
             { name: "general", type: "VIDEO", profileId: profile.id },
+            { name: "feed", profileId: profile.id, type: "FEED" },
+
           ],
         },
         members: {

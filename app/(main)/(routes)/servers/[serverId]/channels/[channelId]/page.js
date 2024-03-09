@@ -7,10 +7,11 @@ import { redirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import {ChannelType} from "@prisma/client";
 import { MediaRoom } from "@/components/media-room";
+import CreatePostBtn from "@/components/feed/create-post-btn";
+import FeedPosts from "@/components/feed/feed-posts";
 
 const ChannelIdPage = async ({ params }) => {
   const profile = await currentProfile();
-
   if (!profile) {
     return redirectToSignIn();
   }
@@ -80,6 +81,26 @@ const ChannelIdPage = async ({ params }) => {
            video={true}
            audio={true}
           />
+        )}
+
+        {channel.type === ChannelType.FEED && (
+          <div className="flex-1 flex flex-col py-4 overflow-y-auto relative left-8">
+            <CreatePostBtn />
+            <FeedPosts 
+            member={member}
+            name={channel.name}
+            chatId={channel.id}
+            type="channel"
+            apiUrl="/api/posts"
+            socketUrl="/api/socket/posts"
+            socketQuery={{
+              channelId:channel.id,
+              serverId:channel.serverId,
+            }}
+            paramKey="channelId"
+            paramValue={channel.id}
+            />
+          </div>
         )}
     </div>
   )

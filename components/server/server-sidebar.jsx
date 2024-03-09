@@ -3,7 +3,13 @@ import { db } from "@/lib/db";
 import { ChannelType, MemberRole } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { MessageSquareText, Mic, Video, ShieldCheck, ShieldAlert } from "lucide-react";
+import {
+  MessageSquareText,
+  Mic,
+  Video,
+  ShieldCheck,
+  ShieldAlert,
+} from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { ServerSearch } from "./server-search";
 import { ServerHeader } from "./server-header";
@@ -64,6 +70,10 @@ export const ServerSidebar = async ({ serverId }) => {
   );
   const members = server?.members.filter(
     (member) => member.profileId !== profile.id
+  );
+
+  const feedChannels = server?.channels.filter(
+    (channel) => channel.type === ChannelType.FEED
   );
 
   if (!server) {
@@ -189,6 +199,28 @@ export const ServerSidebar = async ({ serverId }) => {
             </div>
           </div>
         )}
+
+        {!!feedChannels?.length && (
+          <div className="mb-2">
+            <ServerSection
+              sectionType="channels"
+              channelType={ChannelType.FEED}
+              role={role}
+              label="Feed Channels"
+            />
+            <div className="w-52 space-y-[2px]">
+              {feedChannels.map((channel) => (
+                <ServerChannel
+                  key={channel.id}
+                  channel={channel}
+                  role={role}
+                  server={server}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
         {!!members?.length && (
           <div className="mb-2">
             <ServerSection
@@ -199,11 +231,7 @@ export const ServerSidebar = async ({ serverId }) => {
             />
             <div className="w-52 space-y-[2px]">
               {members.map((member) => (
-                <ServerMember 
-                  key={member.id}
-                  member={member}
-                  server={server}
-                />
+                <ServerMember key={member.id} member={member} server={server} />
               ))}
             </div>
           </div>

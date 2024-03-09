@@ -3,7 +3,7 @@
 import { useParams, useRouter } from "next/navigation";
 import { ChannelType, MemberRole } from "@prisma/client";
 
-import { MessageSquareText, Mic, Video, Edit, Trash, Lock } from "lucide-react";
+import { MessageSquareText, Mic, Video, Edit, Trash, Lock, LayoutList  } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ActionTooltip } from "@/components/action-tooltip";
 import { useModal } from "@/hooks/use-modal-store";
@@ -12,6 +12,7 @@ const iconMap = {
   [ChannelType.TEXT]: MessageSquareText,
   [ChannelType.AUDIO]: Mic,
   [ChannelType.VIDEO]: Video,
+  [ChannelType.FEED]: LayoutList ,
 };
 
 export const ServerChannel = ({ channel, server, role }) => {
@@ -49,7 +50,7 @@ export const ServerChannel = ({ channel, server, role }) => {
       >
         {channel.name}
       </p>
-      {channel.name !== "general" && role !== MemberRole.GUEST && (
+      {(channel.name !== "general" && channel.name !="feed") && role !== MemberRole.GUEST && (
         <div className="ml-auto flex items-center gap-x-2">
           <ActionTooltip label="Edit">
             <Edit
@@ -66,7 +67,7 @@ export const ServerChannel = ({ channel, server, role }) => {
         </div>
       )}
 
-      {channel.name === "general" && (
+      {(channel.name === "general" || channel.name === "feed") && (
         <Lock className="ml-auto w-4 h-4 text-zinc-500 dark:text-rose-600/50" />
       )}
     </button>

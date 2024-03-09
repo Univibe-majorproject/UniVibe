@@ -1,4 +1,4 @@
-import { MessageSquareText } from "lucide-react";
+import { MessageSquareText, Pen } from "lucide-react";
 import { MobileToggle } from "@/components/mobile-toggle";
 import { UserAvatar } from "@/components/user-avatar";
 import { ModeToggle } from "@/components/mode-toggle";
@@ -17,6 +17,11 @@ export const ChatHeader = ({ serverId, name, type, imageUrl }) => {
       {type === "conversation" && (
         <UserAvatar src={imageUrl} className="h-8 w-8 md:h-8 md:w-8 mr-2" />
       )}
+
+      {type === "post" && (
+        <Pen className="h-7 w-7 md:h-7 md:w-7 mr-2" />
+      )}
+
       <p className="font-semibold text-md text-black dark:dark:bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent w-56 truncate">
         {name}
       </p>
