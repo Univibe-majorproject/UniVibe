@@ -24,6 +24,8 @@ import { UserAvatar } from "@/components/user-avatar";
 const formSchema = z.object({
   comment: z.string().min(1, {
     message: "Cannot add empty comment",
+  }).max(1000, {
+    message:"Exceeded the 1000 character limit."
   }),
 });
 

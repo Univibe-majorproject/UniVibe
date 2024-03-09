@@ -33,6 +33,8 @@ import { useModal } from "@/hooks/use-modal-store";
 const formSchema = z.object({
   content: z.string().min(1, {
     message: "Cannot create empty post",
+  }).max(2000, {
+    message:"Exceeded the word limit of 2000 characters."
   }),
   fileUrl: z.string().optional(),
 });

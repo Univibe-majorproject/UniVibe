@@ -185,7 +185,7 @@ const PostCard = ({
         )}
       </div>
       <div className="flex flex-col items-center justify-center w-full h-full">
-        <p className="flex flex-wrap w-full">
+        <p className="min-w-0 break-words w-full">
           {content}
         </p>
         {isImage && (

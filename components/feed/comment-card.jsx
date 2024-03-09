@@ -33,6 +33,7 @@ import {
   Form,
   FormControl,
   FormField,
+  FormMessage,
   FormItem,
 } from "@/components/ui/form";
 
@@ -41,6 +42,8 @@ import { Button } from "@/components/ui/button";
 const formSchema = z.object({
   content: z.string().min(1,{
     message:"Cannot leave a comment empty."
+  }).max(1000, {
+    message:"Exceeded the 1000 character limit."
   }),
 });
 
@@ -120,7 +123,7 @@ const CommentCard = ({
   return (
     <div className="p-4 m-4 flex flex-col space-y-4 bg-[rgb(38,36,54)] rounded-3xl">
       <div className="flex justify-between">
-        <div className="flex space-x-4 p-4 w-full">
+        <div className="flex space-x-4 p-4 w-10/12">
           <UserAvatar
             src={commentOwner.profile.imageUrl}
             className="w-12 h-12 flex"
@@ -139,7 +142,7 @@ const CommentCard = ({
 
             {!isEditing && (
                <p className={cn(
-                "font-normal mt-4 w-full flex flex-wrap",
+                "font-normal mt-4 min-w-0 break-words w-full",
                 isdeleted && "italic text-zinc-300 font-light"
               )}>
                 {comment}
@@ -171,6 +174,7 @@ const CommentCard = ({
                             />
                           </div>
                         </FormControl>
+                        <FormMessage/>
                       </FormItem>
                     )}
                   />
@@ -199,7 +203,7 @@ const CommentCard = ({
 
             <DropdownMenuContent
               className="w-56 text-xs font-medium text-black 
-                    dark:text-neutral-400 relative -top-8 -left-12"
+                    dark:text-neutral-400 absolute -left-48 -top-60"
             >
               {isCommentOwner && (
                 <DropdownMenuItem
