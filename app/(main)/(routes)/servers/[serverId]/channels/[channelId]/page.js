@@ -34,7 +34,7 @@ const ChannelIdPage = async ({ params }) => {
   }
 
   return (
-    <div className="bg-[#FFECD6] dark:bg-black flex flex-col top-0 relative w-full left-2 h-full">   
+    <div className="bg-[#FFECD6] dark:bg-black flex flex-col top-0 relative w-full h-full pl-4">   
         <ChatHeader 
         name={channel.name}
         serverId={channel.serverId}
@@ -84,7 +84,7 @@ const ChannelIdPage = async ({ params }) => {
         )}
 
         {channel.type === ChannelType.FEED && (
-          <div className="flex-1 flex flex-col py-4 overflow-y-auto relative left-8">
+          <div className="flex-1 flex flex-col py-4 overflow-y-auto relative">
             <CreatePostBtn />
             <FeedPosts 
             member={member}

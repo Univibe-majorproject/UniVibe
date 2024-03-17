@@ -55,11 +55,11 @@ const PostIdPage = async ({ params }) => {
   }
 
   return (
-    <div className="bg-[#FFECD6] dark:bg-black flex flex-col top-0 relative w-full left-2 h-full">
+    <div className="bg-[#FFECD6] dark:bg-black flex flex-col top-0 relative w-full h-full pl-4">
       <ChatHeader name={"Post Page"} serverId={channel.serverId} type="post" />
 
       {channel.type === ChannelType.FEED && (
-        <div className="flex flex-1 flex-col py-4 overflow-y-auto relative left-8">
+        <div className="flex flex-1 flex-col py-4 overflow-y-auto relative">
           <div className="top-0 z-10 max-w-5xl">
             <PostCard
               key={post.id}
