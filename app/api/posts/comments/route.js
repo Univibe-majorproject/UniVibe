@@ -83,8 +83,26 @@ export async function POST(req) {
       console.error("Error creating comment in db" , error);
     }
     
+
+    const allComments = await db.comment.findMany({
+      where:{
+        postId,
+      },
+      include:{
+        member:{
+          include:{
+            profile:true,
+          }
+        }
+      },
+      orderBy: {
+        createdAt: "desc",
+      }
+    });
+    
     return NextResponse.json({
-      NewComment
+      NewComment,
+      allComments
     });
   } catch (error) {
     console.error("[COMMENT_POST]", error);

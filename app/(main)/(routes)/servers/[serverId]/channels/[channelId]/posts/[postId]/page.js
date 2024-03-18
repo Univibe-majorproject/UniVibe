@@ -6,7 +6,6 @@ import { db } from "@/lib/db";
 import { redirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { ChannelType } from "@prisma/client";
-import FeedPosts from "@/components/feed/feed-posts";
 import PostCard from "@/components/feed/post-card";
 import { format } from "date-fns";
 import CommentInput from "@/components/feed/comment-input";

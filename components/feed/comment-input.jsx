@@ -20,6 +20,8 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import qs from "query-string";
 import { UserAvatar } from "@/components/user-avatar";
+import { useDispatch } from 'react-redux'
+import { setComments } from "@/lib/features/posts/postSlice";
 
 const formSchema = z.object({
   comment: z.string().min(1, {
@@ -32,6 +34,7 @@ const formSchema = z.object({
 const CommentInput = ({currentMember, serverId, channelId, postId}) => {
     
     const router = useRouter();
+    const dispatch = useDispatch();
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -51,7 +54,8 @@ const CommentInput = ({currentMember, serverId, channelId, postId}) => {
             },
         });
 
-        await axios.post(url,values);
+        const {data} = await axios.post(url,values);
+        dispatch(setComments(data.allComments));
         form.reset();
         router.refresh();
     } catch (error) {

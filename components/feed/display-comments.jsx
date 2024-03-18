@@ -4,12 +4,18 @@ import CommentCard from './comment-card';
 import { format } from "date-fns";
 import qs from "query-string";
 import axios from "axios";
+import { useSelector, useDispatch } from 'react-redux'
+import { setComments } from "@/lib/features/posts/postSlice";
+
 
 const DATE_FORMAT = "d MMM yyyy, HH:mm";
 
 const DisplayComments = ({serverId, channelId, postId, member, currentMember}) => {
 
-    const [comments, setComments] = useState([]);
+    const {comments} = useSelector((state)=> state.post);
+
+    const dispatch = useDispatch();
+
     useEffect(() => {
         const fetchComments = async()=>{
           try {
@@ -23,13 +29,13 @@ const DisplayComments = ({serverId, channelId, postId, member, currentMember}) =
             });
       
             const {data} = await axios.get(url);
-            setComments(data.comments);
+            dispatch(setComments(data.comments));
           } catch (error) {
             console.error(error);
           }
         }
         fetchComments();
-      }, [comments]);
+      }, []);
       
   return (
     <div className='max-w-5xl'>
