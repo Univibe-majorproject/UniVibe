@@ -24,8 +24,8 @@ const HomePage = () => {
       </header>
     </div>
       <main className="px-4 py-8 flex flex-col items-center justify-center">
-        <img src='/images/logo.png' className='w-72 h-72 invert'/>
-        <h2 className="text-3xl font-bold m-12 text-gray-400">The only college social network app that you need.</h2>
+        <img src='/images/logo-final-removebg.png' className=''/>
+        <h2 className="text-4xl font-bold mb-12 text-gray-400">The only college social network app that you need.</h2>
         <Link href="/user-setup" className="bg-white text-black font-bold py-2 px-8 rounded-md shadow-md hover:scale-110 transition h-fit w-fit text-xl">Get the experience now</Link>
       </main>
 
