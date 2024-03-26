@@ -8,6 +8,9 @@ import { cn } from "@/lib/utils";
 import { SocketProvider } from "@/components/providers/socket-provider";
 import { QueryProvider } from "@/components/providers/query-provider";
 
+import StoreProvider from "@/components/providers/store-provider";
+
+
 const font = Open_Sans({ subsets: ["latin"] });
 
 export const metadata = {
@@ -29,7 +32,9 @@ export default function RootLayout({ children }) {
             <SocketProvider>
               <ModalProvider />
               <QueryProvider>
+                <StoreProvider>
                 {children}
+                </StoreProvider>
               </QueryProvider>
             </SocketProvider>
           </ThemeProvider>

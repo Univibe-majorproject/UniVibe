@@ -1,10 +1,9 @@
-import { currentProfilePages } from "@/lib/current-profile-pages";
-import { db } from "@/lib/db";
+import { currentProfile } from "@/lib/current-profile";import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
-    const profile = await currentProfilePages(req);
+    const profile = await currentProfile();
     const { searchParams } = new URL(req.url);
     const { comment } = await req.json();
     const serverId = searchParams.get("serverId");
@@ -83,8 +82,26 @@ export async function POST(req) {
       console.error("Error creating comment in db" , error);
     }
     
+
+    const allComments = await db.comment.findMany({
+      where:{
+        postId,
+      },
+      include:{
+        member:{
+          include:{
+            profile:true,
+          }
+        }
+      },
+      orderBy: {
+        createdAt: "desc",
+      }
+    });
+    
     return NextResponse.json({
-      NewComment
+      NewComment,
+      allComments
     });
   } catch (error) {
     console.error("[COMMENT_POST]", error);
@@ -95,7 +112,7 @@ export async function POST(req) {
 export async function GET(req) {
 
   try {
-    const profile = await currentProfilePages(req);
+    const profile = await currentProfile();
     const { searchParams } = new URL(req.url);
 
     const serverId = searchParams.get("serverId");

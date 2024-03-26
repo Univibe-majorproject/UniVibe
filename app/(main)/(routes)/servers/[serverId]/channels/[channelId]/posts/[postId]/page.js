@@ -6,7 +6,6 @@ import { db } from "@/lib/db";
 import { redirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { ChannelType } from "@prisma/client";
-import FeedPosts from "@/components/feed/feed-posts";
 import PostCard from "@/components/feed/post-card";
 import { format } from "date-fns";
 import CommentInput from "@/components/feed/comment-input";
@@ -55,11 +54,11 @@ const PostIdPage = async ({ params }) => {
   }
 
   return (
-    <div className="bg-[#FFECD6] dark:bg-black flex flex-col top-0 relative w-full left-2 h-full">
+    <div className="bg-[#FFECD6] dark:bg-black flex flex-col top-0 relative w-full h-full pl-4">
       <ChatHeader name={"Post Page"} serverId={channel.serverId} type="post" />
 
       {channel.type === ChannelType.FEED && (
-        <div className="flex flex-1 flex-col py-4 overflow-y-auto relative left-8">
+        <div className="flex flex-1 flex-col py-4 overflow-y-auto relative">
           <div className="top-0 z-10 max-w-5xl">
             <PostCard
               key={post.id}

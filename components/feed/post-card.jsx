@@ -6,6 +6,7 @@ import {useRouter, useParams} from "next/navigation";
 import qs from "query-string";
 import { UserAvatar } from "@/components/user-avatar";
 import Image from "next/image";
+
 import {
   FileIcon,
   Menu,
@@ -90,7 +91,6 @@ const PostCard = ({
     }
     fetchComments();
     fetchPostLike();
-    
   });
   
   const handleLikeClick = async()=> {
