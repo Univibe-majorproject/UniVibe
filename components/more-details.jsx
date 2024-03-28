@@ -1,9 +1,11 @@
 import { useUser } from "@clerk/nextjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Textarea } from "@/components/ui/textarea";
+import { format } from "date-fns";
+
+const DATE_FORMAT = "yyyy-MM-dd";
 
 import {
   Form,
@@ -34,7 +36,7 @@ const formSchema = z.object({
     })
     .optional(), // Optional field for social profiles
   skills: z
-    .array(z.string().trim().min(1, "Skill cannot be empty"))
+    .array(z.string().trim().min(1, "Skills cannot be empty"))
     .superRefine((data, ctx) => {
       if (data.length > 10) {
         ctx.addIssue({ message: "Maximum 10 skills allowed" });
@@ -59,24 +61,48 @@ export const MoreDetailsForm = () => {
         linkedin: "",
         github: "",
       },
-      skills: ["communication"], // Set default empty array for skills
+      skills: [], // Set default empty array for skills
     },
   });
 
   const onSubmit = async (values) => {
-    console.log(values);
-
-    // user.update({
-    //     unsafeMetadata: {},
-    //   });
+    const {profileBio, collegeName, batch, branch, course, dob, socialProfiles,skills} = values;
+    user.update({
+        unsafeMetadata: {
+            profileBio,
+            collegeName,
+            course,
+            branch,
+            batch,
+            dob: format(dob, DATE_FORMAT),
+            socialProfiles,
+            skills
+        },
+      });
   };
 
+  
   const handleSkillsChange = (event) => {
     const skills = event.target.value.split(",").map((skill) => skill.trim());
     form.setValue("skills", skills); // Update form state using setValue
   };
 
   const isLoading = form.formState.isSubmitting;
+
+
+  useEffect(()=>{
+    if(user) {
+      form.setValue("profileBio", user.unsafeMetadata?.profileBio);
+      form.setValue("collegeName", user.unsafeMetadata?.collegeName);
+      form.setValue("course", user.unsafeMetadata?.course);
+      form.setValue("branch", user.unsafeMetadata?.branch);
+      form.setValue("batch", user.unsafeMetadata?.batch);
+      form.setValue("dob", user.unsafeMetadata?.dob);
+      form.setValue("socialProfiles.linkedin", user.unsafeMetadata?.socialProfiles?.linkedin);
+      form.setValue("socialProfiles.github", user.unsafeMetadata?.socialProfiles?.github);
+      form.setValue("skills", user.unsafeMetadata?.skills);
+    }
+  }, [user, form ])
 
   return (
     <div className="bg-white text-black">
