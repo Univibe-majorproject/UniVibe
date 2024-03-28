@@ -6,35 +6,8 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { UserButton } from "@clerk/nextjs";
 import { SocketIndicator } from "@/components/socket-indicator";
 import { ChatVideoButton } from "@/components/chat/chat-video-button";
-import {useUser} from "@clerk/nextjs";
-import { useState } from "react";
+import { MoreDetailsForm } from "@/components/more-details";
 
-const MoreDetailsForm = ()=>{
-
-  const { user } = useUser();
-  const [heading, setHeading] = useState("");
-
-  const handleClick = (e)=>{
-    e.preventDefault();
-    user.update({
-      unsafeMetadata: {
-        heading
-      }
-    })
-  }
-  return (
-    <div className="bg-white text-black">
-      <label for="heading">Heading</label>
-      <input type="text" name="heading" id="heading" value={heading} 
-      onChange={(event)=> setHeading(event.target.value)} 
-      className="bg-white border-gray-700 border-4"/>
-      <button type="button" onClick={handleClick}>Update Heading</button>
-
-      <h2>{heading}</h2>
-      <h4>Unsafe Metadata : {user?.unsafeMetadata?.heading}</h4>
-    </div>
-  )
-}
 
 export const ChatHeader = ({ serverId, name, type, imageUrl }) => {
 
@@ -79,7 +52,7 @@ export const ChatHeader = ({ serverId, name, type, imageUrl }) => {
         <UserButton.UserProfilePage
         label="More Details"
         labelIcon={<ListPlus className="w-5 h-5" />}
-        url="terms"
+        url="more-details"
       >
         <MoreDetailsForm/>
       </UserButton.UserProfilePage>
