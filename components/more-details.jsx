@@ -93,7 +93,7 @@ export const MoreDetailsForm = () => {
         skills,
       },
     });
-    
+    window.location.reload();
   };
 
   const handleSkillsChange = (event) => {
