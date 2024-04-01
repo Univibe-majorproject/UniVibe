@@ -1,6 +1,6 @@
 "use client";
 import { useUser } from "@clerk/nextjs";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -49,6 +49,7 @@ const formSchema = z.object({
 
 export const MoreDetailsForm = () => {
   const { user } = useUser();
+  const [isEditing, setIsEditing] = useState(true);
 
   const form = useForm({
     resolver: zodResolver(formSchema), // Use your defined schema here
@@ -68,8 +69,7 @@ export const MoreDetailsForm = () => {
     },
   });
 
-  const onSubmit = async (values) => {
-
+  const onSubmit = (values) => {
     const {
       profileBio,
       collegeName,
@@ -94,6 +94,7 @@ export const MoreDetailsForm = () => {
       },
     });
     window.location.reload();
+    setIsEditing(false);
   };
 
   const handleSkillsChange = (event) => {
@@ -137,6 +138,7 @@ export const MoreDetailsForm = () => {
         labelIcon={<ListPlus className="w-5 h-5" />}
         url="more-details"
       >
+        {isEditing ? 
         <div className="bg-white text-black">
           <Form {...form}>
             <form
@@ -418,6 +420,10 @@ export const MoreDetailsForm = () => {
             </form>
           </Form>
         </div>
+        : <div className="bg-white text-black">
+          <h2>Details Saved!</h2>
+        </div>
+        }
       </UserButton.UserProfilePage>
     </UserButton>
   );
