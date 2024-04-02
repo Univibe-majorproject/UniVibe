@@ -22,14 +22,29 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
+const validateName = (fieldName) => {
+  return z.string()
+      .trim()
+      .min(1, `${fieldName} is required`)
+      .refine(value => {
+        return /^(?!\d$)[^\d].*$/.test(value);
+      }, { message: `${fieldName} cannot start with a number or consist only of numbers` });
+};
+
 const formSchema = z.object({
   profileBio: z
     .string()
     .max(255, "Profile bio cannot exceed 255 characters")
     .optional(), // Optional with max length
-  collegeName: z.string().trim().min(1, "College name is required"),
-  course: z.string().trim().min(1, "Course name is required"),
-  branch: z.string().trim().min(1, "Branch name is required"),
+
+  collegeName: validateName("College name"),
+  course: validateName("Course name"),
+  branch: validateName("Branch name"),
+
+  // collegeName: z.string().trim().min(1, "College name is required"),
+  // course: z.string().trim().min(1, "Course name is required"),
+  // branch: z.string().trim().min(1, "Branch name is required"),
+
   batch: z.string().trim().min(1, { message: "Invalid batch year" }), // Ensures positive integer for batch
   dob: z.coerce.date(), // Validates date format
   socialProfiles: z
@@ -38,6 +53,13 @@ const formSchema = z.object({
       github: z.string().url({ message: "Invalid GitHub URL" }).optional(), // Optional GitHub URL validation
     })
     .optional(), // Optional field for social profiles
+  // skills: z
+  //   .array(z.string().trim().min(1, "Skills cannot be empty"))
+  //   .superRefine((data, ctx) => {
+  //     if (data.length > 10) {
+  //       ctx.addIssue({ message: "Maximum 10 skills allowed" });
+  //     }
+  //   }), // Array with max 10 skills using superRefine
   skills: z
     .array(z.string().trim().min(1, "Skills cannot be empty"))
     .superRefine((data, ctx) => {
@@ -405,6 +427,7 @@ export const MoreDetailsForm = () => {
                           onChange={handleSkillsChange}
                         />
                       </div>
+                      
                     </FormControl>
                     <FormMessage />
                   </FormItem>
