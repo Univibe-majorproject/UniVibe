@@ -53,20 +53,25 @@ const formSchema = z.object({
       github: z.string().url({ message: "Invalid GitHub URL" }).optional(), // Optional GitHub URL validation
     })
     .optional(), // Optional field for social profiles
-  // skills: z
-  //   .array(z.string().trim().min(1, "Skills cannot be empty"))
-  //   .superRefine((data, ctx) => {
-  //     if (data.length > 10) {
-  //       ctx.addIssue({ message: "Maximum 10 skills allowed" });
-  //     }
-  //   }), // Array with max 10 skills using superRefine
-  skills: z
-    .array(z.string().trim().min(1, "Skills cannot be empty"))
+
+    skills: z.array(z.string().trim())
     .superRefine((data, ctx) => {
       if (data.length > 10) {
-        ctx.addIssue({ message: "Maximum 10 skills allowed" });
+        ctx.addIssue({ 
+          code: z.ZodIssueCode.too_big,
+          inclusive: true,
+          maximum:10,
+          type:"array",
+          message: "Maximum 10 skills allowed" });
       }
-    }), // Array with max 10 skills using superRefine
+      if(data.length === 1 &&  data[0] === ""){
+        ctx.addIssue({  
+          code: z.ZodIssueCode.too_small,
+          inclusive: true,
+          minimum:1,
+          type:"array",
+          message: "Add atleast one skill." });
+    }}) // Array with max 10 skills using superRefine
 });
 
 export const MoreDetailsForm = () => {
