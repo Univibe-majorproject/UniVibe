@@ -120,7 +120,7 @@ export const MoreDetailsForm = () => {
         skills,
       },
     });
-    window.location.reload();
+    // window.location.reload();
     setIsEditing(false);
   };
 
@@ -450,6 +450,10 @@ export const MoreDetailsForm = () => {
         </div>
         : <div className="bg-white text-black">
           <h2>Details Saved!</h2>
+          <Button 
+          size="sm"
+          className="bg-purple-700 my-4"
+          onClick={() => setIsEditing(true)}>Edit Again</Button> 
         </div>
         }
       </UserButton.UserProfilePage>
