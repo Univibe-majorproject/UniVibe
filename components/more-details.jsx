@@ -129,6 +129,37 @@ export const MoreDetailsForm = () => {
     form.setValue("skills", skills); // Update form state using setValue
   };
 
+  const handleBioChange = (event) => {
+    const bio = event.target.value;
+    form.setValue("profileBio", bio); 
+  };
+
+  const handleCollegeChange = (event) => {
+    const college = event.target.value;
+    form.setValue("collegeName", college); 
+  };
+
+  const handleCourseChange = (event) => {
+    const course = event.target.value;
+    form.setValue("course", course);
+  };
+
+  const handleBranchChange = (event) => {
+    const branch = event.target.value;
+    form.setValue("branch", branch); 
+  };
+
+  const handleBatchChange = (event) => {
+    const batch = event.target.value;
+    form.setValue("batch", batch); 
+  };
+
+  const handleSocialProfileChange = (profileType, event) => {
+    const value = event.target.value.trim();
+    form.setValue(`socialProfiles.${profileType}`, value); 
+};
+
+
   const isLoading = form.formState.isSubmitting;
 
   useEffect(() => {
@@ -193,6 +224,7 @@ export const MoreDetailsForm = () => {
                                     focus-visible:ring-offset-0"
                           placeholder="Enter a nice profile bio..."
                           {...field}
+                          onChange={handleBioChange}
                         />
                       </div>
                     </FormControl>
@@ -221,6 +253,7 @@ export const MoreDetailsForm = () => {
                                     focus-visible:ring-offset-0"
                           placeholder="College Name"
                           {...field}
+                          onChange={handleCollegeChange}
                         />
                       </div>
                     </FormControl>
@@ -249,6 +282,7 @@ export const MoreDetailsForm = () => {
                                     focus-visible:ring-offset-0"
                           placeholder="Course"
                           {...field}
+                          onChange={handleCourseChange}
                         />
                       </div>
                     </FormControl>
@@ -279,6 +313,7 @@ export const MoreDetailsForm = () => {
                                     focus-visible:ring-offset-0"
                           placeholder="Branch"
                           {...field}
+                          onChange={handleBranchChange}
                         />
                       </div>
                     </FormControl>
@@ -309,6 +344,7 @@ export const MoreDetailsForm = () => {
                                     focus-visible:ring-offset-0"
                           placeholder="Batch"
                           {...field}
+                          onChange={handleBatchChange}
                         />
                       </div>
                     </FormControl>
@@ -370,7 +406,7 @@ export const MoreDetailsForm = () => {
                                     focus-visible:ring-offset-0"
                           placeholder="Enter linkedin profile url..."
                           {...field}
-                          url=""
+                          onChange={(event) => handleSocialProfileChange('linkedin', event)}
                         />
                       </div>
                     </FormControl>
@@ -399,7 +435,7 @@ export const MoreDetailsForm = () => {
                                     focus-visible:ring-offset-0"
                           placeholder="Enter github profile url..."
                           {...field}
-                          url=""
+                          onChange={(event) => handleSocialProfileChange('github', event)}
                         />
                       </div>
                     </FormControl>
