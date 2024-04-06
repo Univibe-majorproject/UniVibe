@@ -203,6 +203,16 @@ export const MoreDetailsForm = () => {
               className="w-full pt-2"
               onSubmit={form.handleSubmit(onSubmit)}
             >
+              <FormLabel
+                      className="box-border text-black m-0 font-semibold text-3xl leading-relaxed"
+                    >
+                      Update Details
+                     <div>
+                      <p className="box-border text-gray-500 m-0 text-base font-normal leading-tight">
+                        Manage your user information.
+                      </p>
+                    </div>
+              </FormLabel>
               {/* Profile BIO FIELDS */}
               <FormField
                 control={form.control}
@@ -210,8 +220,7 @@ export const MoreDetailsForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel
-                      className="uppercase text-xs font-bold text-zinc-500
-                                dark:text-secondary/70"
+                      className="text-black font-medium text-sm leading-snug flex items-center mt-5"
                     >
                       Profile Bio
                     </FormLabel>
@@ -219,9 +228,9 @@ export const MoreDetailsForm = () => {
                       <div className="w-full">
                         <Input
                           disabled={`${isLoading}`}
-                          className="bg-zinc-300/50 border-0
-                                    focus-visible:ring-0 text-black 
-                                    focus-visible:ring-offset-0"
+                          className="box-border bg-white text-black border border-gray-200 rounded-md 
+                          outline-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent p-4
+                           text-sm leading-normal mb-3"
                           placeholder="Enter a nice profile bio..."
                           {...field}
                           onChange={handleBioChange}
@@ -239,8 +248,7 @@ export const MoreDetailsForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel
-                      className="uppercase text-xs font-bold text-zinc-500
-                                dark:text-secondary/70"
+                      className=" text-black font-medium text-sm leading-snug flex items-center"
                     >
                       College Name
                     </FormLabel>
@@ -248,9 +256,9 @@ export const MoreDetailsForm = () => {
                       <div className="w-full">
                         <Input
                           disabled={`${isLoading}`}
-                          className="bg-zinc-300/50 border-0
-                                    focus-visible:ring-0 text-black 
-                                    focus-visible:ring-offset-0"
+                          className="box-border bg-white text-black border border-gray-200 rounded-md 
+                          outline-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                          p-4 text-sm leading-normal mb-3"
                           placeholder="College Name"
                           {...field}
                           onChange={handleCollegeChange}
@@ -268,8 +276,7 @@ export const MoreDetailsForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel
-                      className="uppercase text-xs font-bold text-zinc-500
-                                dark:text-secondary/70"
+                      className=" text-black font-medium text-sm leading-snug flex items-center"
                     >
                       Course
                     </FormLabel>
@@ -277,9 +284,9 @@ export const MoreDetailsForm = () => {
                       <div className="w-full">
                         <Input
                           disabled={`${isLoading}`}
-                          className="bg-zinc-300/50 border-0
-                                    focus-visible:ring-0 text-black 
-                                    focus-visible:ring-offset-0"
+                          className="box-border bg-white text-black border border-gray-200 rounded-md 
+                          outline-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                          p-4 text-sm leading-normal mb-3"
                           placeholder="Course"
                           {...field}
                           onChange={handleCourseChange}
@@ -299,8 +306,7 @@ export const MoreDetailsForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel
-                      className="uppercase text-xs font-bold text-zinc-500
-                                dark:text-secondary/70"
+                      className=" text-black font-medium text-sm leading-snug flex items-center"
                     >
                       Branch
                     </FormLabel>
@@ -308,9 +314,9 @@ export const MoreDetailsForm = () => {
                       <div className="w-full">
                         <Input
                           disabled={`${isLoading}`}
-                          className="bg-zinc-300/50 border-0
-                                    focus-visible:ring-0 text-black 
-                                    focus-visible:ring-offset-0"
+                          className="box-border bg-white text-black border border-gray-200 rounded-md 
+                          outline-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                          p-4 text-sm leading-normal mb-3"
                           placeholder="Branch"
                           {...field}
                           onChange={handleBranchChange}
@@ -330,8 +336,7 @@ export const MoreDetailsForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel
-                      className="uppercase text-xs font-bold text-zinc-500
-                                dark:text-secondary/70"
+                      className=" text-black font-medium text-sm leading-snug flex items-center"
                     >
                       Batch
                     </FormLabel>
@@ -339,9 +344,9 @@ export const MoreDetailsForm = () => {
                       <div className="w-full">
                         <Input
                           disabled={`${isLoading}`}
-                          className="bg-zinc-300/50 border-0
-                                    focus-visible:ring-0 text-black 
-                                    focus-visible:ring-offset-0"
+                          className="box-border bg-white text-black border border-gray-200 rounded-md 
+                          outline-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                          p-4 text-sm leading-normal mb-3"
                           placeholder="Batch"
                           {...field}
                           onChange={handleBatchChange}
@@ -361,8 +366,7 @@ export const MoreDetailsForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel
-                      className="uppercase text-xs font-bold text-zinc-500
-                                dark:text-secondary/70"
+                      className=" text-black font-medium text-sm leading-snug flex items-center"
                     >
                       DOB
                     </FormLabel>
@@ -371,9 +375,9 @@ export const MoreDetailsForm = () => {
                         <Input
                           disabled={`${isLoading}`}
                           type="date"
-                          className="bg-zinc-300/50 border-0
-                                    focus-visible:ring-0 text-black 
-                                    focus-visible:ring-offset-0"
+                          className="box-border bg-white text-black border border-gray-200 rounded-md 
+                          outline-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                          p-4 text-sm leading-normal mb-3"
                           placeholder="Enter your date of birth"
                           {...field}
                         />
@@ -392,8 +396,7 @@ export const MoreDetailsForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel
-                      className="uppercase text-xs font-bold text-zinc-500
-                                dark:text-secondary/70"
+                      className=" text-black font-medium text-sm leading-snug flex items-center"
                     >
                       Linkedin URL
                     </FormLabel>
@@ -401,9 +404,9 @@ export const MoreDetailsForm = () => {
                       <div className="w-full">
                         <Input
                           disabled={`${isLoading}`}
-                          className="bg-zinc-300/50 border-0
-                                    focus-visible:ring-0 text-black 
-                                    focus-visible:ring-offset-0"
+                          className="box-border bg-white text-black border border-gray-200 rounded-md 
+                          outline-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                          p-4 text-sm leading-normal mb-3"
                           placeholder="Enter linkedin profile url..."
                           {...field}
                           onChange={(event) => handleSocialProfileChange('linkedin', event)}
@@ -421,8 +424,7 @@ export const MoreDetailsForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel
-                      className="uppercase text-xs font-bold text-zinc-500
-                                dark:text-secondary/70"
+                      className=" text-black font-medium text-sm leading-snug flex items-center"
                     >
                       Github URL
                     </FormLabel>
@@ -430,9 +432,9 @@ export const MoreDetailsForm = () => {
                       <div className="w-full">
                         <Input
                           disabled={`${isLoading}`}
-                          className="bg-zinc-300/50 border-0
-                                    focus-visible:ring-0 text-black 
-                                    focus-visible:ring-offset-0"
+                          className="box-border bg-white text-black border border-gray-200 rounded-md 
+                          outline-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                          p-4 text-sm leading-normal mb-3"
                           placeholder="Enter github profile url..."
                           {...field}
                           onChange={(event) => handleSocialProfileChange('github', event)}
@@ -451,8 +453,7 @@ export const MoreDetailsForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel
-                      className="uppercase text-xs font-bold text-zinc-500
-                                dark:text-secondary/70"
+                      className=" text-black font-medium text-sm leading-snug flex items-center"
                     >
                       Skills
                     </FormLabel>
@@ -460,9 +461,9 @@ export const MoreDetailsForm = () => {
                       <div className="w-full">
                         <Input
                           disabled={`${isLoading}`}
-                          className="bg-zinc-300/50 border-0
-                                    focus-visible:ring-0 text-black 
-                                    focus-visible:ring-offset-0"
+                          className="box-border bg-white text-black border border-gray-200 rounded-md 
+                          outline-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                          p-4 text-sm leading-normal mb-3"
                           placeholder="Enter your skills separated by commas (max 10 skills)"
                           {...field}
                           onChange={handleSkillsChange}
@@ -474,21 +475,24 @@ export const MoreDetailsForm = () => {
                   </FormItem>
                 )}
               />
-              <Button
+              <div className="flex justify-end">
+                <Button
                 disabled={isLoading}
                 size="sm"
-                className="bg-purple-700 my-4"
+                className="bg-blue-700 my-4 text-white uppercase hover:bg-blue-900 mr-5 p-4"
               >
                 Save
               </Button>
+              </div>
+              
             </form>
           </Form>
         </div>
         : <div className="bg-white text-black">
           <h2>Details Saved!</h2>
-          <Button 
+          <Button
           size="sm"
-          className="bg-purple-700 my-4"
+          className="bg-blue-700 my-4 text-white uppercase hover:bg-blue-900 mt-10"
           onClick={() => setIsEditing(true)}>Edit Again</Button> 
         </div>
         }
