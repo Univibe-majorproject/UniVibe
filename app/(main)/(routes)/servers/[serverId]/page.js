@@ -22,7 +22,6 @@ const ServerIdPage = async ({ params }) => {
       channels: {
         where: {
           name: "general",
-          type: "TEXT",
         },
         orderBy: {
           createdAt: "asc",

@@ -32,8 +32,6 @@ import { useRouter } from "next/navigation";
 const formSchema = z.object({
   name: z.string().min(1, {
     message: "Server name is required.",
-  }).max(60,{
-    message: "Server name cannot exceed 60 characters."
   }),
   imageUrl: z.string().min(1, {
     message: "Server image is required.",

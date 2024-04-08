@@ -38,7 +38,7 @@ export async function DELETE(req, { params }) {
           delete: {
             id: params.channelId,
             name: {
-              not: "general" && "feed",
+              not: "general",
             },
           },
         },
