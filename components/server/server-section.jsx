@@ -17,7 +17,7 @@ export const ServerSection = ({
     return (
         <div className="flex items-center justify-between py-2">
             <p className="text-xs uppercase font-semibold text-zinc-500
-            dark:text-[rgb(168,154,251)]">
+            dark:text-zinc-400">
                 {label}
             </p>
             {role !== MemberRole.GUEST && sectionType === "channels" && (
@@ -26,9 +26,9 @@ export const ServerSection = ({
                     onClick={()=> onOpen("createChannel", {channelType})}
                         className="text-zinc-500 hover:text-zinc-600
                         dark:text-zinc-400 dark:hover:text-zinc-300
-                        transition z-20"
+                        transition"
                     >
-                        <Plus className="h-4 w-4 text-[rgb(168,154,251)]"/>
+                        <Plus className="h-4 w-4"/>
                     </button>
                 </ActionTooltip>
             )}
@@ -39,9 +39,9 @@ export const ServerSection = ({
                     onClick={()=> onOpen("members", {server})}
                         className="text-zinc-500 hover:text-zinc-600
                         dark:text-zinc-400 dark:hover:text-zinc-300
-                        transition z-20"
+                        transition"
                     >
-                        <Settings className="h-4 w-4 text-[rgb(168,154,251)]"/>
+                        <Settings className="h-4 w-4"/>
                     </button>
             </ActionTooltip>
             )}

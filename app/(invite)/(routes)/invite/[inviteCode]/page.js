@@ -1,29 +1,20 @@
+import { currentProfile } from "@/lib/current-profile";
+
 import { redirect } from "next/navigation";
+import { redirectToSignIn } from "@clerk/nextjs";
 import { db } from "@/lib/db";
-import { initialProfile } from "@/lib/initial-profile";
 
 const InviteCodePage = async ({ params }) => {
   //for fetching the current profile
-  const profile = await initialProfile();
+  const profile = await currentProfile();
+
+  if (!profile) {
+    return redirectToSignIn();
+  }
 
   //check if we have the invite code or not
   if (!params.inviteCode) {
     return redirect("/");
-  }
-
-  //checking if any server exists with the invite code
-  const serverWithInviteCode = await db.server.findFirst({
-    where:{
-      inviteCode: params.inviteCode,
-    }
-  })
-
-  if(!serverWithInviteCode){
-    return (
-      <p className="font-bold text-2xl text-red-500 flex items-center justify-center mt-8">
-        Error! Invalid or old invite url.
-      </p>
-    )
   }
 
   //to check if the user is already a part of this server
