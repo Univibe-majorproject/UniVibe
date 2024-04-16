@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useEffect } from "react";
 
-
 import {
   Dialog,
   DialogContent,
@@ -30,14 +29,16 @@ import { FileUpload } from "@/components/file-upload";
 import { useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
 
-
 //creating our form schema
 const formSchema = z.object({
-  name: z.string().min(1, {
-    message: "Server name is required.",
-  }).max(60,{
-    message: "Server name cannot exceed 60 characters."
-  }),
+  name: z
+    .string()
+    .min(1, {
+      message: "Server name is required.",
+    })
+    .max(60, {
+      message: "Server name cannot exceed 60 characters.",
+    }),
   imageUrl: z.string().min(1, {
     message: "Server image is required.",
   }),
@@ -50,12 +51,11 @@ const formSchema = z.object({
 });
 
 export const EditServerModal = () => {
-  const { isOpen, onClose, type, data } = useModal(); 
+  const { isOpen, onClose, type, data } = useModal();
   const router = useRouter();
 
   const isModalOpen = isOpen && type === "editServer";
   const { server } = data;
-
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -67,16 +67,28 @@ export const EditServerModal = () => {
     },
   });
 
-  useEffect(()=>{
-    if(server) {
+  useEffect(() => {
+    if (server) {
       form.setValue("name", server.name);
       form.setValue("imageUrl", server.imageUrl);
       form.setValue("collegeCode", server.collegeCode);
       form.setValue("collegeDomain", server.collegeDomain);
     }
-  }, [server, form ])
+  }, [server, form]);
 
   const isLoading = form.formState.isSubmitting;
+
+  //storing college domain without '@' and in lowercase.
+  const normalizeCollegeDomain = (event) => {
+    const enteredcollegeDomain = event.target.value;
+    let normalizedDomain = enteredcollegeDomain.trim().toLowerCase();
+
+    if (normalizedDomain.includes("@")) {
+      normalizedDomain = normalizedDomain.split("@")[1];
+    }
+
+    form.setValue("collegeDomain", normalizedDomain);
+  };
 
   //on submit function that creates server, if server not present
   const onSubmit = async (values) => {
@@ -92,22 +104,22 @@ export const EditServerModal = () => {
     }
   };
 
-  //custom on close function 
-  const handleClose = ()=> {
+  //custom on close function
+  const handleClose = () => {
     form.reset();
     onClose();
-  }
+  };
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
       <DialogContent className="bg-white text-black p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
-          Customize your College Network
+            Customize your College Network
           </DialogTitle>
           <DialogDescription className="text-center text-zinc-500">
-          Give your college network a personality with a name and an image. You
-            can always change it again.
+            Give your college network a personality with a name and an image.
+            You can always change it again.
           </DialogDescription>
         </DialogHeader>
 
@@ -159,7 +171,7 @@ export const EditServerModal = () => {
                 )}
               />
 
-<FormField
+              <FormField
                 control={form.control}
                 name="collegeCode"
                 render={({ field }) => (
@@ -195,7 +207,7 @@ export const EditServerModal = () => {
                       className="uppercase text-xs font-bold text-zinc-500
                                 dark:text-secondary/70"
                     >
-                      College Email Domain 
+                      College Email Domain
                     </FormLabel>
 
                     <FormControl>
@@ -206,13 +218,13 @@ export const EditServerModal = () => {
                                     focus-visible:ring-offset-0"
                         placeholder="Enter college email domain (eg. @college.edu.in)"
                         {...field}
+                        onChange={normalizeCollegeDomain}
                       />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-
             </div>
             <DialogFooter className={"bg-grey-100 px-6 py-4"}>
               <Button disable={`${isLoading}`} variant="primary">

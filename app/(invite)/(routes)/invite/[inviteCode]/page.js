@@ -86,7 +86,7 @@ const InviteCodePage = async ({ params }) => {
   {
     return (
       <p className="font-bold text-2xl text-red-500 flex items-center justify-center mt-8">
-       {`You are not authorized to join this college network. This network belongs to ${serverWithInviteCode?.name}.`}
+       {`You are not authorized to join this college network because your email domain does not match this network's domain. This network belongs to ${serverWithInviteCode?.name}.`}
       </p>
     );
   }
