@@ -6,6 +6,10 @@ const InviteCodePage = async ({ params }) => {
   //for fetching the current profile
   const profile = await initialProfile();
 
+  let userEmailDomain = profile.email.split("@")[1]; //Extract user email domain.
+
+  let normalizedUserEmailDomain = userEmailDomain.toLowerCase();
+
   //check if we have the invite code or not
   if (!params.inviteCode) {
     return redirect("/");
@@ -13,54 +17,78 @@ const InviteCodePage = async ({ params }) => {
 
   //checking if any server exists with the invite code
   const serverWithInviteCode = await db.server.findFirst({
-    where:{
+    where: {
       inviteCode: params.inviteCode,
-    }
-  })
+    },
+  });
 
-  if(!serverWithInviteCode){
+  if (!serverWithInviteCode) {
     return (
       <p className="font-bold text-2xl text-red-500 flex items-center justify-center mt-8">
         Error! Invalid or old invite url.
       </p>
-    )
+    );
   }
 
-  //to check if the user is already a part of this server
-  const existingServer = await db.server.findFirst({
+  /* 
+    Checking in the db if the invited college server's domain is the same as the user-email-domain of the user who signed in. 
+  */
+
+  const invitedServerSameAsUserEmailDomain = await db.server.findFirst({
     where: {
       inviteCode: params.inviteCode,
-      members: {
-        some: {
-          profileId: profile.id,
-        },
-      },
+      collegeDomain: normalizedUserEmailDomain,
     },
   });
 
-  //if user is the part of the server then redirect them to that server
-  if (existingServer) {
-    return redirect(`/servers/${existingServer.id}`);
-  }
-
-  //update the server using the unique invite code and create a new member
-  const server = await db.server.update({
-    where: {
-      inviteCode: params.inviteCode,
-    },
-    data: {
-      members: {
-        create: [
-          {
+  if (invitedServerSameAsUserEmailDomain) {
+    const isMember = await db.server.findFirst({
+      where: {
+        inviteCode: params.inviteCode,
+        collegeDomain: normalizedUserEmailDomain,
+        members: {
+          some: {
             profileId: profile.id,
           },
-        ],
+        },
       },
-    },
-  });
+    });
 
-  if (server) {
-    return redirect(`/servers/${server.id}`);
+    //if member , redirect to college server
+    if (isMember) {
+      return redirect(`/servers/${invitedServerSameAsUserEmailDomain.id}`);
+    } else {
+      // Create a new member in the college server
+      const updatedServer = await db.server.update({
+        where: {
+          id: invitedServerSameAsUserEmailDomain.id,
+          collegeDomain: normalizedUserEmailDomain,
+          inviteCode: params.inviteCode,
+        },
+        data: {
+          members: {
+            create: [
+              {
+                profileId: profile.id,
+              },
+            ],
+          },
+        },
+      });
+
+      if (updatedServer) {
+        return redirect(`/servers/${updatedServer.id}`);
+      }
+    }
+  }
+
+  if(!invitedServerSameAsUserEmailDomain)
+  {
+    return (
+      <p className="font-bold text-2xl text-red-500 flex items-center justify-center mt-8">
+       {`You are not authorized to join this college network. This network belongs to ${serverWithInviteCode?.name}.`}
+      </p>
+    );
   }
 
   return null;
