@@ -69,6 +69,18 @@ export const InititalModal = () => {
 
   const isLoading = form.formState.isSubmitting;
 
+  //storing college domain without '@' and in lowercase.
+  const normalizeCollegeDomain = (event) => {
+    const enteredcollegeDomain = event.target.value;
+    let normalizedDomain = enteredcollegeDomain.trim().toLowerCase();
+
+    if(normalizedDomain.includes("@")){
+      normalizedDomain = normalizedDomain.split("@")[1];
+    }
+
+    form.setValue("collegeDomain", normalizedDomain); 
+  };
+
   //on submit function that creates server, if server not present
   const onSubmit = async (values) => {
     try {
@@ -87,7 +99,7 @@ export const InititalModal = () => {
     return null;
   }
   return (
-    <Dialog open>
+    <Dialog open modal={false}>
       <DialogContent className="bg-white text-black p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
@@ -194,6 +206,7 @@ export const InititalModal = () => {
                                     focus-visible:ring-offset-0"
                         placeholder="Enter college email domain (eg. @college.edu.in)"
                         {...field}
+                        onChange={normalizeCollegeDomain}
                       />
                     </FormControl>
                     <FormMessage />
