@@ -75,12 +75,13 @@ const SetupPage = async () => {
         <h4 className="font-bold text-xl text-red-500">
           Your email domain does not match any existing college network.
         </h4>
-        <InititalModal />
+        <InititalModal userEmailDomain={normalizedUserEmailDomain}/>
       </div>
     );
   }
 
-  return <InititalModal />;
+  return <InititalModal 
+  userEmailDomain={normalizedUserEmailDomain}/>;
 };
 
 export default SetupPage;

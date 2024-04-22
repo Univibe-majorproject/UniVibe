@@ -49,7 +49,7 @@ const formSchema = z.object({
   }),
 });
 
-export const InititalModal = () => {
+export const InititalModal = ({userEmailDomain}) => {
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
 
@@ -63,23 +63,23 @@ export const InititalModal = () => {
       name: "",
       imageUrl: "",
       collegeCode: "",
-      collegeDomain: "",
+      collegeDomain: userEmailDomain || "",
     },
   });
 
   const isLoading = form.formState.isSubmitting;
 
   //storing college domain without '@' and in lowercase.
-  const normalizeCollegeDomain = (event) => {
-    const enteredcollegeDomain = event.target.value;
-    let normalizedDomain = enteredcollegeDomain.trim().toLowerCase();
+  // const normalizeCollegeDomain = (event) => {
+  //   const enteredcollegeDomain = event.target.value;
+  //   let normalizedDomain = enteredcollegeDomain.trim().toLowerCase();
 
-    if(normalizedDomain.includes("@")){
-      normalizedDomain = normalizedDomain.split("@")[1];
-    }
+  //   if(normalizedDomain.includes("@")){
+  //     normalizedDomain = normalizedDomain.split("@")[1];
+  //   }
 
-    form.setValue("collegeDomain", normalizedDomain); 
-  };
+  //   form.setValue("collegeDomain", normalizedDomain); 
+  // };
 
   //on submit function that creates server, if server not present
   const onSubmit = async (values) => {
@@ -202,11 +202,12 @@ export const InititalModal = () => {
                       <Input
                         disabled={`${isLoading}`}
                         className="bg-zinc-300/50 border-0
-                                    focus-visible:ring-0 text-black 
-                                    focus-visible:ring-offset-0"
+                                    focus-visible:ring-0 text-gray-600 
+                                    focus-visible:ring-offset-0 cursor-not-allowed"
                         placeholder="Enter college email domain (eg. @college.edu.in)"
+                        value = {form.value}
+                        readOnly
                         {...field}
-                        onChange={normalizeCollegeDomain}
                       />
                     </FormControl>
                     <FormMessage />
