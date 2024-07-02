@@ -6,7 +6,7 @@ import { db } from "@/lib/db";
 
 export async function POST(req) {
   try {
-    const { name, imageUrl } = await req.json();
+    const { name, imageUrl, collegeCode, collegeDomain } = await req.json();
     const profile = await currentProfile();
 
     if (!profile) {
@@ -18,9 +18,17 @@ export async function POST(req) {
         profileId: profile.id,
         name,
         imageUrl,
+        collegeCode,
+        collegeDomain,
         inviteCode: uuidv4(),
         channels: {
-          create: [{ name: "general", profileId: profile.id }],
+          create: [
+            { name: "general", profileId: profile.id },
+            { name: "general", type: "AUDIO", profileId: profile.id },
+            { name: "general", type: "VIDEO", profileId: profile.id },
+            { name: "feed", profileId: profile.id, type: "FEED" },
+
+          ],
         },
         members: {
           create: [{ profileId: profile.id, role: MemberRole.ADMIN }],

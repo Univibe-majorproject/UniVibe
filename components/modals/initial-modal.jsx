@@ -30,15 +30,26 @@ import { useRouter } from "next/navigation";
 
 //creating our form schema
 const formSchema = z.object({
-  name: z.string().min(1, {
-    message: "Server name is required.",
-  }),
+  name: z
+    .string()
+    .min(1, {
+      message: "College name is required.",
+    })
+    .max(60, {
+      message: "College name cannot exceed 60 characters.",
+    }),
   imageUrl: z.string().min(1, {
-    message: "Server image is required.",
+    message: "Image is required.",
+  }),
+  collegeCode: z.string().min(1, {
+    message: "College code is required.",
+  }),
+  collegeDomain: z.string().min(1, {
+    message: "College domain is required.",
   }),
 });
 
-export const InititalModal = () => {
+export const InititalModal = ({userEmailDomain}) => {
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
 
@@ -51,10 +62,24 @@ export const InititalModal = () => {
     defaultValues: {
       name: "",
       imageUrl: "",
+      collegeCode: "",
+      collegeDomain: userEmailDomain || "",
     },
   });
 
   const isLoading = form.formState.isSubmitting;
+
+  //storing college domain without '@' and in lowercase.
+  // const normalizeCollegeDomain = (event) => {
+  //   const enteredcollegeDomain = event.target.value;
+  //   let normalizedDomain = enteredcollegeDomain.trim().toLowerCase();
+
+  //   if(normalizedDomain.includes("@")){
+  //     normalizedDomain = normalizedDomain.split("@")[1];
+  //   }
+
+  //   form.setValue("collegeDomain", normalizedDomain); 
+  // };
 
   //on submit function that creates server, if server not present
   const onSubmit = async (values) => {
@@ -64,6 +89,7 @@ export const InititalModal = () => {
       form.reset();
       router.refresh();
       window.location.reload();
+      console.log(values);
     } catch (error) {
       console.log(error);
     }
@@ -73,21 +99,21 @@ export const InititalModal = () => {
     return null;
   }
   return (
-    <Dialog open>
+    <Dialog open modal={false}>
       <DialogContent className="bg-white text-black p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
-            Customize your server
+            Create your College Network
           </DialogTitle>
           <DialogDescription className="text-center text-zinc-500">
-            Give your server a personality with a name and an image. You can
-            always change it later.
+            Give your college network a personality with a name and an image. You
+            can always change it later.
           </DialogDescription>
         </DialogHeader>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <div className="space-y-8 px-6">
+            <div className="space-y-4 px-6">
               <div className="flex items-center justify-center text-center">
                 <FormField
                   control={form.control}
@@ -115,7 +141,7 @@ export const InititalModal = () => {
                       className="uppercase text-xs font-bold text-zinc-500
                                 dark:text-secondary/70"
                     >
-                      Server Name
+                      College Name
                     </FormLabel>
 
                     <FormControl>
@@ -124,7 +150,63 @@ export const InititalModal = () => {
                         className="bg-zinc-300/50 border-0
                                     focus-visible:ring-0 text-black 
                                     focus-visible:ring-offset-0"
-                        placeholder="Enter server name"
+                        placeholder="Enter college name"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="collegeCode"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel
+                      className="uppercase text-xs font-bold text-zinc-500
+                                dark:text-secondary/70"
+                    >
+                      Unique College Code
+                    </FormLabel>
+
+                    <FormControl>
+                      <Input
+                        disabled={`${isLoading}`}
+                        className="bg-zinc-300/50 border-0
+                                    focus-visible:ring-0 text-black 
+                                    focus-visible:ring-offset-0"
+                        placeholder="Enter unique college code"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="collegeDomain"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel
+                      className="uppercase text-xs font-bold text-zinc-500
+                                dark:text-secondary/70"
+                    >
+                      College Email Domain 
+                    </FormLabel>
+
+                    <FormControl>
+                      <Input
+                        disabled={`${isLoading}`}
+                        className="bg-zinc-300/50 border-0
+                                    focus-visible:ring-0 text-gray-600 
+                                    focus-visible:ring-offset-0 cursor-not-allowed"
+                        placeholder="Enter college email domain (eg. @college.edu.in)"
+                        value = {form.value}
+                        readOnly
                         {...field}
                       />
                     </FormControl>

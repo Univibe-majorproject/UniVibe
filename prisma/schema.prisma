@@ -13,7 +13,19 @@ model Profile {
   userId String @unique
   name String
   imageUrl String @db.Text
-  email String @db.Text //college email of student
+  email String @db.Text // college email of student
+
+  // more-details fields
+
+  profileBio  String? 
+  collegeName String?
+  course      String?
+  branch      String?
+  batch       String?
+  dob         DateTime? @db.Date 
+  linkedinUrl String?
+  githubUrl   String?
+  skills      String?  // Comma-separated string for skills
 
   servers Server[] //server of college 
   members Member[]
@@ -23,11 +35,15 @@ model Profile {
   updatedAt DateTime @updatedAt
 }
 
-model Server {   //college server
+model Server {   // college server
   id String @id @default(uuid())
   name String
   imageUrl String @db.Text
-  inviteCode String @unique    //college server unique invite code
+  inviteCode String @unique    // college server unique invite code
+  
+  collegeCode String
+  collegeDomain String
+  isVerified Boolean @default(false)
 
   profileId String
   profile Profile @relation(fields: [profileId],references: [id],onDelete: Cascade)
@@ -59,6 +75,9 @@ model Member{
 
   messages Message[]
   directMessages DirectMessage[]
+  posts Post[]
+  comments Comment[]
+  likes Like[]
 
   conversationsInitiated Conversation[] @relation("MemberOne")
   conversationsReceived Conversation[] @relation("MemberTwo")
@@ -75,6 +94,7 @@ enum ChannelType{
   TEXT
   AUDIO
   VIDEO
+  FEED
 }
 
 model Channel{
@@ -89,6 +109,7 @@ model Channel{
   server Server @relation(fields: [serverId],references: [id],onDelete: Cascade)
 
   messages Message[]
+  posts Post[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -155,4 +176,62 @@ model DirectMessage{
 
   @@index([memberId])
   @@index([conversationId])
+}
+
+model Comment {
+  id String @id @default(uuid())
+  content String @db.Text
+
+  memberId String
+  member Member @relation(fields: [memberId],references: [id],onDelete: Cascade)
+
+  postId String
+  post Post @relation(fields: [postId],references: [id],onDelete: Cascade)
+
+  deleted Boolean @default(false)
+
+  @@index([memberId])
+  @@index([postId])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Like {
+  id String  @id @default(uuid())
+  
+  memberId String
+  member Member @relation(fields: [memberId],references: [id],onDelete: Cascade)
+
+  postId String
+  post Post @relation(fields: [postId],references: [id],onDelete: Cascade)
+
+
+  @@index([memberId])
+  @@index([postId])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model Post{
+  id String @id @default(uuid())
+  content   String @db.Text
+  fileUrl String? @db.Text
+
+  memberId String
+  member Member @relation(fields: [memberId],references: [id],onDelete: Cascade)
+
+  channelId String
+  channel Channel @relation(fields: [channelId], references: [id],onDelete: Cascade)
+
+  comments  Comment[]
+  likes Like[]
+
+  @@index([memberId])
+  @@index([channelId])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

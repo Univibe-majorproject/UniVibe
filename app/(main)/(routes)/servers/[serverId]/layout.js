@@ -23,14 +23,14 @@ const ServerIdLayout = async ({ children, params }) => {
   });
 
   if (!server) {
-    return redirect("/");
+    return redirect("/user-setup");
   }
 
   return (
     <div className="h-full">
       <div
-        className="hidden md:flex h-full w-60 z-20 flex-col fixed
-             inset-y-0"
+        className="hidden md:flex h-full w-64 z-20 flex-col fixed
+             inset-y-0 left-0"
       >
         <ServerSidebar serverId={params.serverId} />
       </div>
