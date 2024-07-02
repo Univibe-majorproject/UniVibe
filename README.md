@@ -16,5 +16,5 @@ UniVibe redefines student interaction in the university setting by breaking down
 
 - **Language:** JavaScript
 - **Framework:** Next.js/React.js
-- **Database:** PlanetScale (MySql)
+- **Database:** Aiven (MySql)
 - **ORM:** Prisma
